@@ -60,83 +60,52 @@ void playerBox(int yPos,int xPos,int color){
 	}
 }
 void tank(int angle, int groundHeight, int xPos){
+<<<<<<< Updated upstream
 	drawBox(groundHeight,xPos,2);
 	drawBox(groundHeight,xPos-6,2);
 	drawBox(groundHeight,xPos+9,2);
 	drawBox(groundHeight+6,xPos,2);
 	drawBox(groundHeight+6,xPos+6,1);
 	/*if(angle >= 0 && angle <=180){
+=======
+	if(angle >= 0 && angle <=180){
+>>>>>>> Stashed changes
 		if(angle > 154){
-			drawBox(xPos,groundHeight,2);
-			drawBox(xPos,groundHeight,2);
-			drawBox(xPos,groundHeight,2);
-			drawBox(xPos,groundHeight,2);
-			drawBox(xPos,groundHeight,1);
-
+			smallBox(xPos,groundHeight,2);
+			smallBox(xPos+2,groundHeight-1,2);
+			smallBox(xPos+4,groundHeight,2);
+			smallBox(xPos+2,groundHeight,2);
+			smallBox(xPos,groundHeight-1,1);
 		} else if(angle > 110){
-			moveToXY(xPos-1,groundHeight+1);
-						fgcolor(2);
-						printf("%c",219);
-						moveForward(1);
-						printf("%c",219);
-						moveForward(1);
-						printf("%c",219);
-						moveUp(1);
-						fgcolor(1);
-						printf("%c",219);
-						moveBack(1);
-						fgcolor(2);
-						printf("%c",219);
+			smallBox(xPos,groundHeight,2);
+			smallBox(xPos+2,groundHeight-1,2);
+			smallBox(xPos+4,groundHeight,2);
+			smallBox(xPos+2,groundHeight,2);
+			smallBox(xPos,groundHeight-2,1);
 		} else if(angle > 70){
-			moveToXY(xPos-1,groundHeight+1);
-						fgcolor(2);
-						printf("%c",219);
-						moveForward(1);
-						printf("%c",219);
-						moveForward(1);
-						printf("%c",219);
-						moveUp(1);
-						fgcolor(1);
-						printf("%c",219);
-						moveBack(1);
-						fgcolor(2);
-						printf("%c",219);
+			smallBox(xPos,groundHeight,2);
+			smallBox(xPos+2,groundHeight-1,2);
+			smallBox(xPos+4,groundHeight,2);
+			smallBox(xPos+2,groundHeight,2);
+			smallBox(xPos+2,groundHeight-2,1);
 		} else if(angle > 25){
-			moveToXY(xPos-1,groundHeight+1);
-						fgcolor(2);
-						printf("%c",219);
-						moveForward(1);
-						printf("%c",219);
-						moveForward(1);
-						printf("%c",219);
-						moveUp(1);
-						fgcolor(1);
-						printf("%c",219);
-						moveBack(1);
-						fgcolor(2);
-						printf("%c",219);
+			smallBox(xPos,groundHeight,2);
+			smallBox(xPos+2,groundHeight-1,2);
+			smallBox(xPos+4,groundHeight,2);
+			smallBox(xPos+2,groundHeight,2);
+			smallBox(xPos+4,groundHeight-2,1);
 		} else{
-			moveToXY(xPos-1,groundHeight+1);
-			fgcolor(2);
-			printf("%c",219);
-			moveForward(1);
-			printf("%c",219);
-			moveForward(1);
-			printf("%c",219);
-			moveUp(1);
-			fgcolor(1);
-			printf("%c",219);
-			moveBack(1);
-			fgcolor(2);
-			printf("%c",219);
-		}
+			smallBox(xPos,groundHeight,2);
+			smallBox(xPos+2,groundHeight-1,2);
+			smallBox(xPos+4,groundHeight,2);
+			smallBox(xPos+2,groundHeight,2);
+			smallBox(xPos+4,groundHeight-1,1);		}
 	} else if(angle > 180){
 		angle = 180;
 	} else{
 		angle = 0;
-	}*/
+	}
 }
-
 
 
 
