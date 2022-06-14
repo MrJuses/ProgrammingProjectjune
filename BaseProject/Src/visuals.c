@@ -59,12 +59,21 @@ void playerBox(int yPos,int xPos,int color){
 		}
 	}
 }
+void smallBox(int yPos, int xPos, int color){
+	int i;
+	fgcolor(color);
+	for( i = yPos; i < yPos + 2; i++){
+		moveToXY(xPos,i);
+		printf("%c",219);
+
+	}
+}
 void tank(int angle, int groundHeight, int xPos){
-	drawBox(groundHeight,xPos,2);
-	drawBox(groundHeight,xPos-6,2);
-	drawBox(groundHeight,xPos+9,2);
-	drawBox(groundHeight+6,xPos,2);
-	drawBox(groundHeight+6,xPos+6,1);
+	smallBox(xPos,groundHeight,2);
+	smallBox(xPos+2,groundHeight-1,2);
+	smallBox(xPos+4,groundHeight,2);
+	smallBox(xPos+2,groundHeight,2);
+	smallBox(xPos+4,groundHeight-1,1);
 	/*if(angle >= 0 && angle <=180){
 		if(angle > 154){
 			drawBox(xPos,groundHeight,2);

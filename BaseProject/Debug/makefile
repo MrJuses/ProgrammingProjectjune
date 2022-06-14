@@ -60,8 +60,8 @@ all: main-build
 main-build: BaseProject.elf secondary-outputs
 
 # Tool invocations
-BaseProject.elf BaseProject.map: $(OBJS) $(USER_OBJS) C:\Users\emilm\eclipse-workspace\June\ Project\exercise\ 1.1\BaseProject\STM32F302R8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "BaseProject.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\emilm\eclipse-workspace\June Project\exercise 1.1\BaseProject\STM32F302R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BaseProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+BaseProject.elf BaseProject.map: $(OBJS) $(USER_OBJS) C:\Users\Tnopn\Documents\GitHub\ProgrammingProjectjune\BaseProject\STM32F302R8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "BaseProject.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Tnopn\Documents\GitHub\ProgrammingProjectjune\BaseProject\STM32F302R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BaseProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

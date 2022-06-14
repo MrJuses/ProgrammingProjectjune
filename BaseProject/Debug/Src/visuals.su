@@ -1,4 +1,6 @@
 ../Src/visuals.c:26:6:initHeight	32	static
 ../Src/visuals.c:33:6:drawTerrain	32	static
 ../Src/visuals.c:42:6:drawBox	32	static
-../Src/visuals.c:52:6:tank	24	static
+../Src/visuals.c:52:6:playerBox	32	static
+../Src/visuals.c:62:6:smallBox	32	static
+../Src/visuals.c:71:6:tank	24	static
