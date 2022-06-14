@@ -1,0 +1,13 @@
+../Src/Exercises.c:18:9:expand	16	static
+../Src/Exercises.c:22:9:fixRound	16	static
+../Src/Exercises.c:25:9:convert	16	static
+../Src/Exercises.c:28:6:printFix	16	static
+../Src/Exercises.c:37:6:window	32	static
+../Src/Exercises.c:81:6:move	24	static
+../Src/Exercises.c:107:6:initBall	24	static
+../Src/Exercises.c:118:6:ball	64	static
+../Src/Exercises.c:140:6:clean	24	static
+../Src/Exercises.c:161:6:lcdUpdate	4	static
+../Src/Exercises.c:167:6:lcdWriteString	40	static
+../Src/Exercises.c:184:6:lcdWrapString	56	static
+../Src/Exercises.c:216:6:lcdCommunication	8	static
