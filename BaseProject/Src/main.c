@@ -23,13 +23,16 @@ int main(void){
 
 
 	//Project start
-	int tHeight[73];
-	initHeight(tHeight,73);
+	//int tHeight[73];
+	//initHeight(tHeight,73);
 	clearScreenResCurser();
 	//drawTerrain(10,12,tHeight);
 	//drawBox(7,10,7);
 	//drawBox(7,10,7);
-	tank(160,15,15);
+	//tank(160,15,15);
+
+
+	drawLetter(10,10,3);
 
 	while(1){}
 
