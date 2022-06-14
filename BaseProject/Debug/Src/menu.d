@@ -1,5 +1,6 @@
-SPL/src/stm32f30x_syscfg.o: ../SPL/src/stm32f30x_syscfg.c \
- C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_syscfg.h \
+Src/menu.o: ../Src/menu.c \
+ C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/stm32f30x_conf.h \
+ C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_adc.h \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/stm32f30x.h \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/cmsis/core_cm4.h \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/cmsis/core_cmInstr.h \
@@ -7,7 +8,6 @@ SPL/src/stm32f30x_syscfg.o: ../SPL/src/stm32f30x_syscfg.c \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/cmsis/core_cm4_simd.h \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/system_stm32f30x.h \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/stm32f30x_conf.h \
- C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_adc.h \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_can.h \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_crc.h \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_comp.h \
@@ -17,6 +17,7 @@ SPL/src/stm32f30x_syscfg.o: ../SPL/src/stm32f30x_syscfg.c \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_exti.h \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_flash.h \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_gpio.h \
+ C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_syscfg.h \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_i2c.h \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_iwdg.h \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_opamp.h \
@@ -27,8 +28,16 @@ SPL/src/stm32f30x_syscfg.o: ../SPL/src/stm32f30x_syscfg.c \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_tim.h \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_usart.h \
  C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_wwdg.h \
- C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_misc.h
-C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_syscfg.h:
+ C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_misc.h \
+ C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/30010_io.h \
+ C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/caller.h \
+ C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/ansi.h \
+ C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/sin.h \
+ C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/charset.h \
+ C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/visuals.h \
+ C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/random.h
+C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/stm32f30x_conf.h:
+C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_adc.h:
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/stm32f30x.h:
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/cmsis/core_cm4.h:
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/cmsis/core_cmInstr.h:
@@ -36,7 +45,6 @@ C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjec
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/cmsis/core_cm4_simd.h:
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/system_stm32f30x.h:
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/stm32f30x_conf.h:
-C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_adc.h:
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_can.h:
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_crc.h:
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_comp.h:
@@ -46,6 +54,7 @@ C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjec
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_exti.h:
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_flash.h:
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_gpio.h:
+C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_syscfg.h:
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_i2c.h:
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_iwdg.h:
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_opamp.h:
@@ -57,3 +66,10 @@ C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjec
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_usart.h:
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_wwdg.h:
 C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/SPL/inc/stm32f30x_misc.h:
+C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/30010_io.h:
+C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/caller.h:
+C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/ansi.h:
+C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/sin.h:
+C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/charset.h:
+C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/visuals.h:
+C:/Users/emilm/eclipse-workspace/June\ Project/JuneProgProject/ProgrammingProjectjune/BaseProject/Inc/random.h:
