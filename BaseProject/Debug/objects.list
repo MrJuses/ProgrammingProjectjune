@@ -25,7 +25,6 @@
 "./Src/ansi.o"
 "./Src/charset.o"
 "./Src/main.o"
-"./Src/menu.o"
 "./Src/random.o"
 "./Src/sin.o"
 "./Src/syscalls.o"
