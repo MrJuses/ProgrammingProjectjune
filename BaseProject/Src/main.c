@@ -20,16 +20,25 @@ int main(void){
 	//ball(0,0,170,50);
 
 	//lcdCommunication();
-
-
+	int Height[36] =
+	{
+	2, 1, 0, 1, 1, 2,
+	3, 3, 3, 2, 1, 2,
+	1, 2, 3, 2, 3, 3,
+	3, 2, 2, 3, 4, 3,
+	4, 3, 3, 2, 1, 2,
+	1, 2, 1, 1, 2, 3,
+	};
+	int mapHeight=35;
+	int mapWidth=35;
 	//Project start
 	int tHeight[73];
 	initHeight(tHeight,73);
 	clearScreenResCurser();
-	//drawTerrain(10,12,tHeight);
+	drawTerrain(mapWidth,mapHeight,Height);
 	//drawBox(7,10,7);
 	//drawBox(7,10,7);
-	tank(160,15,15);
+	tank(69,mapHeight,60,Height);
 
 	while(1){}
 

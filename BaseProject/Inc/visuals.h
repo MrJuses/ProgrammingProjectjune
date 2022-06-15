@@ -12,6 +12,6 @@ void initHeight(int arr[],int size);
 void drawBox(int yPos, int xPos,int color);
 void drawTerrain(int yPos, int xPos,int arr[]);
 void playerBox(int yPos,int xPos,int color);
-void tank(int angle, int groundheight, int yPos);
+void tank(int angle, int xSize, int yPos,int arr[]);
 
 #endif /* VISUALS_H_ */
