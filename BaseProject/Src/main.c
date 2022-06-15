@@ -14,12 +14,13 @@
 int main(void){
 	uart_init(256000);
 	printf("\n");
-	//printFix(expand(SIN[270]));
-	//printf("\n%", COS(180)>>14);
-	//window(0,0,64,32);
-	//ball(0,0,170,50);
+	//Project start
+	int gWidth = 189, gHeight = 100;
+	clearScreenResCurser();
+	menu(gWidth,10,10,1,0,0);
 
-	//lcdCommunication();
+
+
 	int Height[36] =
 	{
 	2, 1, 0, 1, 1, 2,
@@ -36,8 +37,6 @@ int main(void){
 	initHeight(tHeight,73);
 	clearScreenResCurser();
 	drawTerrain(mapWidth,mapHeight,Height);
-	//drawBox(7,10,7);
-	//drawBox(7,10,7);
 	tank(69,mapHeight,60,Height);
 
 	while(1){}

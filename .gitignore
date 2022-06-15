@@ -239,3 +239,6 @@ BaseProject/.metadata/version.ini
 .metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
 .metadata/.plugins/org.eclipse.core.resources/.projects/BaseProject/.markers.snap
 .metadata/.plugins/org.eclipse.core.resources/.projects/BaseProject/.syncinfo.snap
+BaseProject/Debug/Src/Initialization.su
+BaseProject/Debug/Src/Initialization.o
+BaseProject/Debug/Src/Initialization.d

@@ -8,16 +8,8 @@
 #ifndef MENU_H_
 #define MENU_H_
 
-void drawLetter(int yPos,int xPos,int color){
-	int i,j;
-	fgcolor(color);
-	for( i = xPos; i <= xPos; i++){
-		for( j = yPos; j <= yPos + 1; j++){
-			moveToXY(i,j);
-			printf("%c",219);
-		}
-	}
-}
-void title();
+void drawLetter(int yPos,int xPos,int color);
+void alphabet(char string[20],int yPos,int xPos);
+void menu(int width,int yPos,int xPos,int up,int down,int center);
 
 #endif /* MENU_H_ */
