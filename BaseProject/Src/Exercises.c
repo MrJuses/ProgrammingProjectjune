@@ -33,40 +33,7 @@ void printFix(int32_t i) {
 	printf("%ld.%04ld", i >> 16, 10000 * (uint32_t)(i & 0xFFFF) >> 16); // Print a maximum of 4 decimal digits to avoid overflow
 }
 
-//Exercise 2.2
-void window(int y1, int x1, int y2, int x2){
-	clearScreenResCurser();
-	int x, y;
-	for(x = x1; x < x2; x++){
-		for(y = y1; y < y2; y++){
-			if (x == x1){
-				if (y == y1){
-					printf("%c",201);
-				} else if (y == y2-1){
-					printf("%c\n",187);
-				} else{
-					printf("%c",205);
-				}
-			} else if(x == x2 - 1){
-				if (y == y1){
-					printf("%c",200);
-				} else if (y == y2 - 1){
-					printf("%c\n",188);
-				} else{
-					printf("%c",205);
-				}
-			} else{
-				if (y == y1){
-					printf("%c",186);
-				} else if (y == y2 - 1){
-					printf("%c\n",186);
-				} else{
-					printf(" ");
-				}
-			}
-		}
-	}
-}
+
 
 //Exercise 4
 typedef struct{

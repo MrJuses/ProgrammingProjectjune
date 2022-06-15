@@ -9,17 +9,33 @@
 #include <sin.h>
 #include "charset.h"
 #include "visuals.h"
+#include "Movement.h"
 
 
 int main(void){
 	uart_init(256000);
+	clearScreenResCurser();
+	init();
+	setLed(1,1,0);
+	moveToXY(10,10);
+	printf(" XX ");
+	moveBack(4);
+	moveDown(1);
+	printf("XXXX");
+	moveBack(4);
+	moveDown(1);
+	printf("O  O");
+	uint8_t variabel;
+	variabel = readJoystick();
+
 	printf("\n");
 	//Project start
 	int gWidth = 189, gHeight = 100;
 	clearScreenResCurser();
 	menu(gWidth,10,10,1,0,0);
 
-
+	uint8_t variabel;
+	variabel = readJoystick();
 
 	int Height[36] =
 	{
@@ -32,6 +48,7 @@ int main(void){
 	};
 	int mapHeight=35;
 	int mapWidth=35;
+
 	//Project start
 	int tHeight[73];
 	initHeight(tHeight,73);
@@ -39,7 +56,12 @@ int main(void){
 	drawTerrain(mapWidth,mapHeight,Height);
 	tank(69,mapHeight,60,Height);
 
-	while(1){}
+	while(1){
+		if (variabel != readJoystick()){
+			variabel = readJoystick();
+		MoveWithJoystick(variabel);
+		}
+	}
 
 	return 0;
 }

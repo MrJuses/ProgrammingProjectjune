@@ -9,6 +9,7 @@
 #include "stdio.h"
 #include "stdint.h"
 #include "30010_io.h"
+#include "ansi.h"
 
 void init(){
 
@@ -108,18 +109,55 @@ void joystickLed(){
 		}
 		if (down){
 			GPIOB->ODR |= (0x0001 << 4); // Red PRINT CYAN
+
 		}
 		if (left){
 			GPIOA->ODR |= (0x0001 << 9); // Blue PRINT GREEN
 			GPIOB->ODR |= (0x0001 << 4); // Red
+
 		}
 		if (right){
 			GPIOC->ODR |= (0x0001 << 7); // Green PRINT BLUE
 			GPIOB->ODR |= (0x0001 << 4); // Red
+
 		}
 		if (center){
 			GPIOC->ODR |= (0x0001 << 7); // Green PRINT MAGENTA
+
 		}
+}
+void window(int y1, int x1, int y2, int x2){
+	clearScreenResCurser();
+	int x, y;
+	for(x = x1; x < x2; x++){
+		for(y = y1; y < y2; y++){
+			if (x == x1){
+				if (y == y1){
+					printf("%c",201);
+				} else if (y == y2-1){
+					printf("%c\n",187);
+				} else{
+					printf("%c",205);
+				}
+			} else if(x == x2 - 1){
+				if (y == y1){
+					printf("%c",200);
+				} else if (y == y2 - 1){
+					printf("%c\n",188);
+				} else{
+					printf("%c",205);
+				}
+			} else{
+				if (y == y1){
+					printf("%c",186);
+				} else if (y == y2 - 1){
+					printf("%c\n",186);
+				} else{
+					printf(" ");
+				}
+			}
+		}
+	}
 }
 
 void setLed(int blue, int green, int red){
@@ -151,5 +189,32 @@ void setLed(int blue, int green, int red){
 	}else {
 		// White
 	}
+}
+
+uint8_t readJoystick(){
+	uint16_t up = GPIOA->IDR & (0x0001 << 4); //Read from pin PA4
+	uint16_t center = GPIOB->IDR & (0x0001 << 5); //Read from pin PB5
+	uint16_t down = GPIOB->IDR & (0x0001 << 0); //Read from pin PB0
+	uint16_t left = GPIOC->IDR & (0x0001 << 1); //Read from pin PC1
+	uint16_t right = GPIOC->IDR & (0x0001 << 0); //Read from pin PC0
+
+	uint8_t bit = 0;
+
+	if (up){
+		bit |= 0x01;
+	}
+	if (down){
+		bit |= 0x02;
+	}
+	if (left){
+		bit |= 0x04;
+	}
+	if (right){
+		bit |= 0x08;
+	}
+	if (center){
+		bit |= 0x10;
+	}
+	return bit;
 }
 
