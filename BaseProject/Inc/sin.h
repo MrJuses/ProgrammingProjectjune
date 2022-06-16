@@ -13,5 +13,5 @@
 
 // === LUT DECLARATIONS ===
 extern const signed short SIN[360];
-
+signed short COS(int angle);
 #endif	// SIN_H

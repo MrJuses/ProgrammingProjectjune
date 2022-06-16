@@ -10,7 +10,7 @@
 #include "charset.h"
 #include "visuals.h"
 #include "Movement.h"
-
+#include "shoot.h"
 
 int main(void){
 	uart_init(256000);
@@ -28,14 +28,12 @@ int main(void){
 	uint8_t variabel;
 	variabel = readJoystick();
 
-	printf("\n");
+	//printf("\n");
 	//Project start
-	int gWidth = 189, gHeight = 100;
-	clearScreenResCurser();
-	menu(gWidth,10,10,1,0,0);
+	//int gWidth = 189, gHeight = 100;
+	//clearScreenResCurser();
+	//menu(gWidth,10,10,1,0,0);
 
-	uint8_t variabel;
-	variabel = readJoystick();
 
 	int Height[36] =
 	{
@@ -55,7 +53,7 @@ int main(void){
 	clearScreenResCurser();
 	drawTerrain(mapWidth,mapHeight,Height);
 	tank(69,mapHeight,60,Height);
-
+	shoot(12,12,4,45,1);
 	while(1){
 		if (variabel != readJoystick()){
 			variabel = readJoystick();
