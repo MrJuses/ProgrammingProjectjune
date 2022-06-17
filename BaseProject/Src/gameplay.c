@@ -33,8 +33,8 @@ void runGame(){
 		int mapWidth=35;
 	clearScreenResCurser();
 	drawTerrain(mapWidth,mapHeight,Height);
-	tank(63,mapHeight,3,Height,2);
-	tank(138,mapHeight,22,Height,4);
+	tank(69,mapHeight,2,Height,2);
+	tank(138,mapHeight,31,Height,4);
 	shoot(25,27,2,35,1,Height,mapHeight);
 }
 
