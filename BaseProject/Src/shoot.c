@@ -22,7 +22,8 @@
 #define FIX16_MULT(a, b) ( (a)*(b) >> FIX16_SHIFT )
 #define FIX16_DIV(a, b) ( ((a) << FIX16_SHIFT) / b )
 
-void shoot(int y, int x, int v, int angle, int g){
+void shoot(int y, int x, int v, int angle, int g, Height[],int baseHeight){
+	int check=0;
 	int t;
 	int l;
 	int32_t xPos;
@@ -35,9 +36,9 @@ void shoot(int y, int x, int v, int angle, int g){
 	int32_t fixT;
 	int bulletX;
 	int bulletY;
-	vX=convert(v)*(-expand(SIN[angle]));
+	vX=convert(v)*(expand(SIN[angle]));
 	vY=convert(v)*expand(COS(angle));
-	for(t=0;t<1000000;t++){
+	while(check==0){
 		fixT=convert(t);
 		//for(l=0;l<100000;l++)
 		xPos=fixX-FIX16_MULT(vX, fixT)+FIX16_MULT(fixG, FIX16_MULT(fixT, fixT));
@@ -45,7 +46,15 @@ void shoot(int y, int x, int v, int angle, int g){
 		bulletX=(int)fixRound(xPos);
 		bulletY=(int)fixRound(yPos);
 		smallBox(bulletY,bulletX,4);
+		collision(bulletY, bulletX, Height, baseHeight);
+		t++;
+
 	}
 
 }
+int collision(int y, int x, int Height[], int baseHeight){
+	if(baseHeight-Height[y/6]>=x/3){return 1;}
+	else if(x<=tankX&&(y>=tankY)&&(y<=(tankY+2))){return 1;}
+	else{return 0;}
 
+}
