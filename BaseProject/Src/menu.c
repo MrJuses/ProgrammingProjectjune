@@ -10,16 +10,25 @@
 #include "charset.h"
 #include "visuals.h"
 #include "random.h"
+<<<<<<< Updated upstream
 /*
+=======
+#include "movement.h"
+#include "Initialization.h"
+
+>>>>>>> Stashed changes
 void drawLetter(int yPos, int xPos,int color){
 	fgcolor(color);
 	moveToXY(xPos,yPos);
 	printf("%c",219);
 	printf("%c",219);
 }
+void menu(int width,int yPos,int xPos){
+	uint8_t variabel;
+	variabel = readJoystick();
 
-void menu(int width,int yPos,int xPos,int up,int down,int center){
-	int color = 1,y = yPos;
+	clearScreenResCurser();
+	int y = yPos;
 	alphabet("space-tanks",(width/4)-5,xPos);
 	//print border
 	moveToXY(yPos+10,0);
@@ -27,17 +36,56 @@ void menu(int width,int yPos,int xPos,int up,int down,int center){
 	for(int i = 0; i < width; i++){
 		printf("%c",205);
 	}
+	fgcolor(15);
+	moveToXY(xPos+15,width/2-3);
+	printf("Start");
+	moveToXY(xPos+17,width/2-6);
+	printf("Difficulty");
+	moveToXY(xPos+19,width/2-3);
+	printf("Help");
 
-	//print start
-	while(center != 1){
-		moveToXY(xPos+15,width/2-3);
-		fgcolor(15);
-		printf("start");
-		moveToXY(xPos+12,yPos+20);
-		printf("Help");
+	moveToXY(xPos+35,width/2-12);
+	printf("(Joystick Up -> Start)");
+	moveToXY(xPos+36,width/2-16);
+	printf("(Joystick Center -> Difficulty)");
+	moveToXY(xPos+37,width/2-12);
+	printf("(Joystick Right -> Help)");
+	while(1){
+		if (variabel != readJoystick()){
+			variabel = readJoystick();
+			moveMenu(variabel,width,xPos,yPos);
+		}
 	}
 
 }
+void helpMenu(int width,int yPos,int xPos){
+	uint8_t variabel;
+	variabel = readJoystick();
+
+	clearScreenResCurser();
+	alphabet("help",(width/3)+10,xPos);
+	//print border
+	moveToXY(yPos+10,0);
+	fgcolor(15);
+	for(int i = 0; i < width; i++){
+		printf("%c",205);
+	}
+
+	fgcolor(15);
+	moveToXY(xPos+15,width/2-3);
+	printf("Back");
+
+	moveToXY(xPos+35,width/2-11);
+	printf("(Joystick Left -> Back)");
+
+	while(1){
+		if (variabel != readJoystick()){
+			variabel = readJoystick();
+			moveMenu(variabel,width,xPos,yPos);
+		}
+	}
+}
+
 void alphabet(char string[20],int yPos,int xPos){
 	int color = 1,y = yPos;
 	int stringLength = strlen(string);

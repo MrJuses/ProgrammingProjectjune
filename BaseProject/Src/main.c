@@ -10,29 +10,33 @@
 #include "charset.h"
 #include "visuals.h"
 #include "Movement.h"
+<<<<<<< Updated upstream
 #include "shoot.h"
+=======
+#include "lcd.h"
+
+>>>>>>> Stashed changes
 
 int main(void){
 	uart_init(256000);
 	clearScreenResCurser();
 	init();
 	setLed(1,1,0);
-	moveToXY(10,10);
-	printf(" XX ");
-	moveBack(4);
-	moveDown(1);
-	printf("XXXX");
-	moveBack(4);
-	moveDown(1);
-	printf("O  O");
 	uint8_t variabel;
 	variabel = readJoystick();
 
 	//printf("\n");
 	//Project start
+<<<<<<< Updated upstream
 	//int gWidth = 189, gHeight = 100;
 	//clearScreenResCurser();
 	//menu(gWidth,10,10,1,0,0);
+=======
+	lcdDisplay(4,4);
+	int gWidth = 189, gHeight = 100;
+	clearScreenResCurser();
+	menu(gWidth,10,10);
+>>>>>>> Stashed changes
 
 
 	int Height[36] =
@@ -57,7 +61,7 @@ int main(void){
 	while(1){
 		if (variabel != readJoystick()){
 			variabel = readJoystick();
-		MoveWithJoystick(variabel);
+			MoveWithJoystick(variabel);
 		}
 	}
 

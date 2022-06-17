@@ -9,6 +9,6 @@
 #define MOVEMENT_H_
 
 void MoveWithJoystick(uint8_t variabel);
-
+void moveMenu(uint8_t variabel,int width, int xPos,int yPos);
 
 #endif /* MOVEMENT_H_ */

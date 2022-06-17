@@ -9,6 +9,7 @@
 #include "stdint.h"
 #include "ansi.h"
 #include "Initialization.h"
+#include "menu.h"
 
 void MoveWithJoystick(uint8_t variabel){
 
@@ -61,6 +62,27 @@ void MoveWithJoystick(uint8_t variabel){
 		}case 16: { // CENTER
 			clearScreenResCurser();
 
+			break;
+
+		}
+
+	}
+}
+
+void moveMenu(uint8_t variabel,int width,int xPos,int yPos){
+	switch(variabel){
+		 case 1: { // UP
+
+			break;
+		}case 2: { // DOWN
+			break;
+		}case 4:{ // LEFT
+			menu(width,yPos,xPos);
+			break;
+		}case 8:{ // RIGHT
+			helpMenu(width,yPos,xPos);
+			break;
+		}case 16: { // CENTER
 			break;
 
 		}
