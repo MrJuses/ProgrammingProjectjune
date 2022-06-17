@@ -32,7 +32,7 @@ void shoot(int y, int x, int v, int angle, int g,int Height[],int baseHeight){
 	int32_t yPos=0;
 	int32_t fixX=convert(x);
 	int32_t fixY=convert(y);
-	int32_t fixG=convert(g)>>6;
+	int32_t fixG=convert(g)>>4;
 	int32_t vX;
 	int32_t vY;
 	int32_t fixT;
@@ -44,14 +44,15 @@ void shoot(int y, int x, int v, int angle, int g,int Height[],int baseHeight){
 	while(check==0){
 		fixT=convert(t);
 		fixT2=FIX8_MULT(fixT, fixT);
-		//for(l=0;l<100000;l++);
+
 		xPos=fixX-FIX8_MULT(vX, fixT)+FIX8_MULT(fixG, fixT2);
 		yPos=fixY+FIX8_MULT(vY, fixT);
 		bulletX=fixRound(xPos);
 		bulletY=fixRound(yPos)-(fixRound(yPos)+1)%2;
 		check=collision(bulletY, bulletX, Height, baseHeight);
-		smallBox(bulletY,bulletX,4);
-
+		smallBox(bulletY,bulletX,11);
+		for(l = 0; l < 70000; l++);
+		deleteBox(bulletY,bulletX);
 		t++;
 
 	}
