@@ -74,8 +74,8 @@ void smallBox(int yPos, int xPos, int color){
 	}
 }
 void tank(int angle,int xSize, int yPos,int arr[]){
-	int i=(xSize-((arr[(yPos/6)]+1)*3));
-	int j=yPos+1;
+	int i=(xSize-((arr[(yPos)]+1)*3));
+	int j=(6*yPos)+1;
 	if(angle >= 0 && angle <=180){
 		if(angle > 154){
 			smallBox(j,i+2,2);

@@ -2,7 +2,7 @@
  * fixed.h
  *
  *  Created on: 16. jun. 2022
- *      Author: Tnopn
+ *      Author: Thomas
  */
 
 #ifndef FIXED_H_

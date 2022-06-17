@@ -2,7 +2,7 @@
  * shoot.c
  *
  *  Created on: 15. jun. 2022
- *      Author: Tnopn
+ *      Author: Thomas
  */
 #include "stm32f30x_conf.h" // STM32 config
 #include "30010_io.h" 		// Input/output library for this course
@@ -17,36 +17,41 @@
 #include "visuals.h"
 #include "random.h"
 #include "fixed.h"
-
-#define FIX16_SHIFT 16
-#define FIX16_MULT(a, b) ( (a)*(b) >> FIX16_SHIFT )
-#define FIX16_DIV(a, b) ( ((a) << FIX16_SHIFT) / b )
+#include "shoot.h"
+#define FIX8_SHIFT 8
+#define FIX8_MULT(a, b) ( ((a)*(b)) >> FIX8_SHIFT )
+#define FIX8_DIV(a, b) ( ((a) << FIX8_SHIFT) / b )
+/*int32_t FIX16_MULT(int32_t a, int32_t b){
+	return(((a)*(b))>>16);}*/
 
 void shoot(int y, int x, int v, int angle, int g,int Height[],int baseHeight){
 	int check=0;
-	int t;
+	int t=0;
 	int l;
-	int32_t xPos;
-	int32_t yPos;
+	int32_t xPos=0;
+	int32_t yPos=0;
 	int32_t fixX=convert(x);
 	int32_t fixY=convert(y);
-	int32_t fixG=convert(g);
+	int32_t fixG=convert(g)>>6;
 	int32_t vX;
 	int32_t vY;
 	int32_t fixT;
-	int bulletX;
-	int bulletY;
-	vX=convert(v)*(expand(SIN[angle]));
-	vY=convert(v)*expand(COS(angle));
+	int32_t fixT2;
+	int bulletX=12;
+	int bulletY=12;
+	vX=(FIX8_MULT(convert(v), fixRound(expand(SIN[angle]))));
+	vY=FIX8_MULT(convert(v), fixRound(expand(COS(angle))));
 	while(check==0){
 		fixT=convert(t);
-		//for(l=0;l<100000;l++)
-		xPos=fixX-FIX16_MULT(vX, fixT)+FIX16_MULT(fixG, FIX16_MULT(fixT, fixT));
-		yPos=fixY+FIX16_MULT(vY, fixT);
-		bulletX=(int)fixRound(xPos);
-		bulletY=(int)fixRound(yPos);
+		fixT2=FIX8_MULT(fixT, fixT);
+		//for(l=0;l<100000;l++);
+		xPos=fixX-FIX8_MULT(vX, fixT)+FIX8_MULT(fixG, fixT2);
+		yPos=fixY+FIX8_MULT(vY, fixT);
+		bulletX=fixRound(xPos);
+		bulletY=fixRound(yPos)-(fixRound(yPos)+1)%2;
+		check=collision(bulletY, bulletX, Height, baseHeight);
 		smallBox(bulletY,bulletX,4);
-		collision(bulletY, bulletX, Height, baseHeight);
+
 		t++;
 
 	}
@@ -55,7 +60,7 @@ void shoot(int y, int x, int v, int angle, int g,int Height[],int baseHeight){
 int collision(int y, int x, int Height[], int baseHeight){
 	int tankX=0;
 	int tankY=0;
-	if(baseHeight-Height[y/6]>=x/3){return 1;}
+	if(baseHeight-((Height[y/6])*3)<=x){return 1;}
 	else if((x<=tankX)&&(y>=tankY)&&(y<=(tankY+2))){return 1;}
 	else{return 0;}
 

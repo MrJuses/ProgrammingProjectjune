@@ -12,6 +12,7 @@
 #include "Movement.h"
 #include "shoot.h"
 #include "lcd.h"
+#include "gameplay.h"
 
 int main(void){
 	uart_init(256000);
@@ -19,7 +20,7 @@ int main(void){
 	init();
 	setLed(1,1,0);
 	uint8_t variabel;
-	variabel = readJoystick();
+/*	variabel = readJoystick();
 
 	//printf("\n");
 	//Project start
@@ -27,27 +28,15 @@ int main(void){
 	int gWidth = 189, gHeight = 100;
 	clearScreenResCurser();
 	menu(gWidth,10,10);
+*/
+	runGame();
 
 
-	int Height[36] =
-	{
-	2, 1, 0, 1, 1, 2,
-	3, 3, 3, 2, 1, 2,
-	1, 2, 3, 2, 3, 3,
-	3, 2, 2, 3, 4, 3,
-	4, 3, 3, 2, 1, 2,
-	1, 2, 1, 1, 2, 3,
-	};
-	int mapHeight=35;
-	int mapWidth=35;
 
 	//Project start
 	int tHeight[73];
 	initHeight(tHeight,73);
-	clearScreenResCurser();
-	drawTerrain(mapWidth,mapHeight,Height);
-	tank(69,mapHeight,60,Height);
-	shoot(12,12,4,45,1,Height,1);
+
 	while(1){
 		if (variabel != readJoystick()){
 			variabel = readJoystick();
