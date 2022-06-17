@@ -73,39 +73,39 @@ void smallBox(int yPos, int xPos, int color){
 		printf("%c",219);
 	}
 }
-void tank(int angle,int xSize, int yPos,int arr[]){
+void tank(int angle,int xSize, int yPos,int arr[],int color){
 	int i=(xSize-((arr[(yPos)]+1)*3));
 	int j=(6*yPos)+1;
 	if(angle >= 0 && angle <=180){
 		if(angle > 154){
-			smallBox(j,i+2,2);
-			smallBox(j+2,i+1,2);
-			smallBox(j+4,i+2,2);
-			smallBox(j+2,i+2,2);
+			smallBox(j,i+2,color);
+			smallBox(j+2,i+1,color);
+			smallBox(j+4,i+2,color);
+			smallBox(j+2,i+2,color);
 			smallBox(j,i+1,1);
 		} else if(angle > 110){
-			smallBox(j,i+2,2);
-			smallBox(j+2,i+1,2);
-			smallBox(j+4,i+2,2);
-			smallBox(j+2,i+2,2);
+			smallBox(j,i+2,color);
+			smallBox(j+2,i+1,color);
+			smallBox(j+4,i+2,color);
+			smallBox(j+2,i+2,color);
 			smallBox(j,i,1);
 		} else if(angle > 70){
-			smallBox(j,i+2,2);
-			smallBox(j+2,i+1,2);
-			smallBox(j+4,i+2,2);
-			smallBox(j+2,i+2,2);
+			smallBox(j,i+2,color);
+			smallBox(j+2,i+1,color);
+			smallBox(j+4,i+2,color);
+			smallBox(j+2,i+2,color);
 			smallBox(j+2,i,1);
 		} else if(angle > 25){
-			smallBox(j,i+2,2);
-			smallBox(j+2,i+1,2);
-			smallBox(j+4,i+2,2);
-			smallBox(j+2,i+2,2);
+			smallBox(j,i+2,color);
+			smallBox(j+2,i+1,color);
+			smallBox(j+4,i+2,color);
+			smallBox(j+2,i+2,color);
 			smallBox(j+4,i,1);
 		} else{
-			smallBox(j,i+2,2);
-			smallBox(j+2,i+1,2);
-			smallBox(j+4,i+2,2);
-			smallBox(j+2,i+2,2);
+			smallBox(j,i+2,color);
+			smallBox(j+2,i+1,color);
+			smallBox(j+4,i+2,color);
+			smallBox(j+2,i+2,color);
 			smallBox(j+4,i+1,1);
 		}
 	} else if(angle > 180){

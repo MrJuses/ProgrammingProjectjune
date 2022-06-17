@@ -29,12 +29,12 @@ void runGame(){
 		4, 3, 3, 2, 1, 2,
 		1, 2, 1, 1, 2, 3,
 		};
-		int mapHeight=35;
+		int mapHeight=41;
 		int mapWidth=35;
 	clearScreenResCurser();
 	drawTerrain(mapWidth,mapHeight,Height);
-	tank(69,mapHeight,3,Height);
-	tank(138,mapHeight,22,Height);
+	tank(63,mapHeight,3,Height,2);
+	tank(138,mapHeight,22,Height,4);
 	shoot(25,27,2,35,1,Height,mapHeight);
 }
 

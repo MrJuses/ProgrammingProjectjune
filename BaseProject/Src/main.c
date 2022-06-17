@@ -25,7 +25,7 @@ int main(void){
 	//printf("\n");
 	//Project start
 	lcdDisplay(10,100,10,0);
-	int gWidth = 189, gHeight = 100;
+	int gWidth = 210, gHeight = 100;
 	clearScreenResCurser();
 	menu(gWidth,10,10);
 

@@ -25,7 +25,7 @@ void menu(int width,int yPos,int xPos){
 
 	clearScreenResCurser();
 	int y = yPos;
-	alphabet("space-tanks",(width/4)-5,xPos);
+	alphabet("space-tanks",(width/4),xPos);
 	//print border
 	moveToXY(yPos+10,0);
 	fgcolor(15);
@@ -59,7 +59,7 @@ void helpMenu(int width,int yPos,int xPos){
 	variabel = readJoystick();
 
 	clearScreenResCurser();
-	alphabet("help",(width/3)+10,xPos);
+	alphabet("help",(width/2)-20,xPos);
 	//print border
 	moveToXY(yPos+10,0);
 	fgcolor(15);
