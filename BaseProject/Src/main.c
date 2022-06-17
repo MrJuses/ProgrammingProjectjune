@@ -20,7 +20,7 @@ int main(void){
 	init();
 	setLed(1,1,0);
 	uint8_t variabel;
-/*	variabel = readJoystick();
+	variabel = readJoystick();
 
 	//printf("\n");
 	//Project start
@@ -28,8 +28,6 @@ int main(void){
 	int gWidth = 189, gHeight = 100;
 	clearScreenResCurser();
 	menu(gWidth,10,10);
-*/
-	runGame();
 
 
 

@@ -72,7 +72,7 @@ void MoveWithJoystick(uint8_t variabel){
 void moveMenu(uint8_t variabel,int width,int xPos,int yPos){
 	switch(variabel){
 		 case 1: { // UP
-
+			runGame();
 			break;
 		}case 2: { // DOWN
 			break;
