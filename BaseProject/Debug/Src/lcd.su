@@ -1,0 +1,2 @@
+../Src/lcd.c:14:6:lcdDisplay	24	static
+../Src/lcd.c:20:6:lcdWrite	40	static

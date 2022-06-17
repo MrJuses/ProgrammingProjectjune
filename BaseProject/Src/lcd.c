@@ -9,10 +9,11 @@
 #include "charset.h"
 #include "lcd.h"
 
+uint8_t buffer[512];
+
 void lcdDisplay(int health,int ammo){
-	uint8_t buffer[512];
 	lcd_init();
-	lcdWrite(buffer,"Health",36,1,health);
+	lcdWrite(buffer,"Health: ",36,1,health);
 	lcd_push_buffer(buffer);
 }
 
@@ -27,11 +28,12 @@ void lcdWrite(uint8_t buffer[],char string[50], int y, int x,int variable){
 	}
 	for(int i = 0; i < stringLength; i++){
 		for(int j = 0; j < 5; j++){
-			//buffer[y] = character_data[string[i]-0x20][j];
+			buffer[y] = character_data[string[i]-0x20][j];
 			y++;
 		}
 	}
-	//buffer[stringLength]=(char)variable;
+
+	buffer[stringLength]=(char)variable-0x20;
 	lcd_push_buffer(buffer);
 }
 

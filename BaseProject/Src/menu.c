@@ -13,7 +13,6 @@
 #include "movement.h"
 #include "Initialization.h"
 
-
 void drawLetter(int yPos, int xPos,int color){
 	fgcolor(color);
 	moveToXY(xPos,yPos);
@@ -283,4 +282,3 @@ void alphabet(char string[20],int yPos,int xPos){
 
 	}
 }
-
