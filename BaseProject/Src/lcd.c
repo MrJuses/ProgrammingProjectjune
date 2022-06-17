@@ -8,18 +8,29 @@
 #include <sin.h>
 #include "charset.h"
 #include "lcd.h"
+#include "math.h"
 
 uint8_t buffer[512];
 
-void lcdDisplay(int health,int ammo){
+void lcdDisplay(int health,int ammo,int fuel,int specialAmmo){
 	lcd_init();
-	lcdWrite(buffer,"Health: ",36,1,health);
+	char string[50];
+	sprintf(string,"Health:               %d",health);
+	lcdWrite(buffer,string,1,0);
+	sprintf(string,"Fuel:                 %d",fuel);
+	lcdWrite(buffer,string,1,1);
+	sprintf(string,"Ammo:                 %d",ammo);
+	lcdWrite(buffer,string,1,2);
+	sprintf(string,"Special Ammo:         %d",specialAmmo);
+	lcdWrite(buffer,string,1,3);
 	lcd_push_buffer(buffer);
 }
 
-void lcdWrite(uint8_t buffer[],char string[50], int y, int x,int variable){
+void lcdWrite(uint8_t buffer[],char string[50], int y, int x){
 	int stringLength = strlen(string);
-	if(x==1){
+	if(x==0){
+		y += 0;
+	} else if(x==1){
 		y += 128;
 	} else if(x==2){
 		y += 256;
@@ -32,8 +43,6 @@ void lcdWrite(uint8_t buffer[],char string[50], int y, int x,int variable){
 			y++;
 		}
 	}
-
-	buffer[stringLength]=(char)variable-0x20;
 	lcd_push_buffer(buffer);
 }
 
