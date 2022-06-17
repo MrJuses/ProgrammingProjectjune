@@ -10,12 +10,8 @@
 #include "charset.h"
 #include "visuals.h"
 #include "Movement.h"
-<<<<<<< Updated upstream
 #include "shoot.h"
-=======
 #include "lcd.h"
-
->>>>>>> Stashed changes
 
 int main(void){
 	uart_init(256000);
@@ -27,16 +23,10 @@ int main(void){
 
 	//printf("\n");
 	//Project start
-<<<<<<< Updated upstream
-	//int gWidth = 189, gHeight = 100;
-	//clearScreenResCurser();
-	//menu(gWidth,10,10,1,0,0);
-=======
 	lcdDisplay(4,4);
 	int gWidth = 189, gHeight = 100;
 	clearScreenResCurser();
 	menu(gWidth,10,10);
->>>>>>> Stashed changes
 
 
 	int Height[36] =
@@ -57,7 +47,7 @@ int main(void){
 	clearScreenResCurser();
 	drawTerrain(mapWidth,mapHeight,Height);
 	tank(69,mapHeight,60,Height);
-	shoot(12,12,4,45,1);
+	shoot(12,12,4,45,1,Height,1);
 	while(1){
 		if (variabel != readJoystick()){
 			variabel = readJoystick();

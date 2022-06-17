@@ -22,7 +22,7 @@
 #define FIX16_MULT(a, b) ( (a)*(b) >> FIX16_SHIFT )
 #define FIX16_DIV(a, b) ( ((a) << FIX16_SHIFT) / b )
 
-void shoot(int y, int x, int v, int angle, int g, Height[],int baseHeight){
+void shoot(int y, int x, int v, int angle, int g,int Height[],int baseHeight){
 	int check=0;
 	int t;
 	int l;
@@ -53,8 +53,10 @@ void shoot(int y, int x, int v, int angle, int g, Height[],int baseHeight){
 
 }
 int collision(int y, int x, int Height[], int baseHeight){
+	int tankX=0;
+	int tankY=0;
 	if(baseHeight-Height[y/6]>=x/3){return 1;}
-	else if(x<=tankX&&(y>=tankY)&&(y<=(tankY+2))){return 1;}
+	else if((x<=tankX)&&(y>=tankY)&&(y<=(tankY+2))){return 1;}
 	else{return 0;}
 
 }

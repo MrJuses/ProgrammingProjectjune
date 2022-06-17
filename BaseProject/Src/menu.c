@@ -10,13 +10,10 @@
 #include "charset.h"
 #include "visuals.h"
 #include "random.h"
-<<<<<<< Updated upstream
-/*
-=======
 #include "movement.h"
 #include "Initialization.h"
 
->>>>>>> Stashed changes
+
 void drawLetter(int yPos, int xPos,int color){
 	fgcolor(color);
 	moveToXY(xPos,yPos);
@@ -286,4 +283,4 @@ void alphabet(char string[20],int yPos,int xPos){
 
 	}
 }
-*/
+
