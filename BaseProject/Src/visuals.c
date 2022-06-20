@@ -22,19 +22,7 @@
       6        Cyan            14       Light Cyan
       7        Light Gray      15       White
 */
-int Height[24] =
-{
-1, 2, 3, 4, 5, 5,
-5, 5, 5, 4, 3, 3,
-4, 3, 2, 3, 4, 5,
-6, 7, 8, 8, 7, 7,
-};
-void initHeight(int arr[],int size){
-	arr[0] = 3*getRand(1,3);
-	for(int i = 1; i < size; i++){
-		arr[i] = arr[i-1] + 3*getRand(-1,1);
-	}
-}
+
 
 void drawTerrain(int yPos,int xPos,int arr[]){
 	int i;
@@ -120,6 +108,10 @@ void tank(int angle,int xSize, int yPos,int arr[],int color){
 	} else{
 		angle = 0;
 	}
+}
+
+void powerUp(){
+	printf("");
 }
 
 

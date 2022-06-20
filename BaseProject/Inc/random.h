@@ -9,6 +9,6 @@
 #ifndef RANDOM_H_
 #define RANDOM_H_
 
-int getRand(int lowerLimit,int upperLimit);
+int getRand();
 
 #endif /* RANDOM_H_ */

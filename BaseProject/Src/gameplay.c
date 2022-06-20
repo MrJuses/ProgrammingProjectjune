@@ -19,17 +19,30 @@
 #include "fixed.h"
 #include "shoot.h"
 #include "gameplay.h"
-void runGame(){
-	int Height[36] =
-		{
-		2, 1, 0, 1, 1, 2,
-		3, 3, 3, 2, 1, 2,
-		1, 2, 3, 2, 3, 3,
-		3, 2, 2, 3, 4, 3,
-		4, 3, 3, 2, 1, 2,
-		1, 2, 1, 1, 2, 3,
-		};
+#include "random.h"
 
+void runGame(){
+	randConfig();
+	int Height[36];
+	for(int i = 0 ; i < 36 ; i++){
+		if(i == 0){
+			Height[i] = getRand()/2;
+		} else{
+			int x = getRand()/2;
+			int sameLevel = 0;
+			while(!(Height[i-1]+1 == x || Height[i-1]-1 == x || Height[i-1] == x)){
+				x = getRand()/2;
+
+				/*if(Height[i-1] == x){
+					sameLevel++;
+					if(sameLevel >=2){
+						x += 1;
+					}
+				}*/
+			}
+			Height[i] = x;
+		}
+	}
 		int mapHeight=49;
 		int mapWidth=35;
 	clearScreenResCurser();

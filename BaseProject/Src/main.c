@@ -29,12 +29,13 @@ int main(void){
 	uart_init(256000);
 	clearScreenResCurser();
 	init();
+	randConfig();
 	setLed(1,1,0);
 	uint8_t variabel;
 	variabel = readJoystick();
 	tank_t tank1;
 	tank_t tank2;
-	//printf("\n");
+
 	//Project start
 	lcdDisplay(10,100,10,0);
 	int gWidth = 210, gHeight = 100;
@@ -42,10 +43,8 @@ int main(void){
 	menu(gWidth,10,10);
 
 
-
 	//Project start
 	int tHeight[73];
-	initHeight(tHeight,73);
 
 	while(1){
 		if (variabel != readJoystick()){

@@ -54,8 +54,6 @@ void move(Ball_t * Balls,int32_t x1,int x2, int y1, int y2){
 
 void initBall(Ball_t * Balls,int yMax,int xMax){
 	//Balls->angle=getRand(0,1);
-	Balls->speedX=getRand(0,2);
-	Balls->speedY=getRand(0,2);
 	//getXYMove(Balls);
 	Balls->hit = 0;
 	Balls->yLoc=yMax/2;

@@ -16,4 +16,7 @@ void tank(int angle, int xSize, int yPos,int arr[],int color);
 void smallBox(int yPos, int xPos, int color);
 void deleteBox(int yPos, int xPos);
 void deleteSmallBox(int yPos, int xPos);
+void powerUp();
+void meteor();
+
 #endif /* VISUALS_H_ */

@@ -12,5 +12,6 @@ void init();
 void joystickLed();
 void setLed(int blue, int green, int red);
 uint8_t readJoystick();
+void randConfig();
 
 #endif /* INITIALIZATION_H_ */

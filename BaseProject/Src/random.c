@@ -9,25 +9,23 @@
 #include <sin.h>
 #include "charset.h"
 #include "random.h"
+#include "Initialization.h"
 
-int getRand(int lowerLimit,int upperLimit){
-	srand(time(NULL));
-	lowerLimit++;
-	int r =  lowerLimit + rand() % (upperLimit - lowerLimit);
-	return r;
-}
+int getRand(){
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_1Cycles5);
 
-int randVal(){
-	static int randArr[100];
-	for(int i = 0; i < 20; i++){
-		randArr[i] = getRand(1,2);
-	}
-	for(int i = 21; i < 50; i++){
-		randArr[i] = getRand(1,10);
-	}
-	for(int i = 51; i < 100; i++){
-		randArr[i] = getRand(1,100);
-	}
-	return randArr;
+	ADC_StartConversion(ADC1); // Start ADC read
+	while (ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == 0); // Wait for ADC read
+
+	int x = ADC_GetConversionValue(ADC1); // Read the ADC value
+
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_2, 1, ADC_SampleTime_1Cycles5);
+
+	ADC_StartConversion(ADC1); // Start ADC read
+	while (ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == 0); // Wait for ADC read
+
+	x += ADC_GetConversionValue(ADC1); // Read the ADC value;
+	x = x % 10;
+	return x;
 }
 
