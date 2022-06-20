@@ -52,7 +52,8 @@ void shoot(int y, int x, int v, int angle, int g,int Height[],int baseHeight){
 		check=collision(bulletY, bulletX, Height, baseHeight);
 		smallBox(bulletY,bulletX,11);
 		for(l = 0; l < 70000; l++);
-		deleteBox(bulletY,bulletX);
+		//deleteBox(bulletY,bulletX);
+		deleteSmallBox(bulletY,bulletX);
 		t++;
 
 	}
@@ -61,8 +62,16 @@ void shoot(int y, int x, int v, int angle, int g,int Height[],int baseHeight){
 int collision(int y, int x, int Height[], int baseHeight){
 	int tankX=0;
 	int tankY=0;
-	if(baseHeight-((Height[y/6])*3)<=x){return 1;}
+	if(baseHeight-((Height[y/6])*3)<=x){
+		destruction(y,x);
+		return 1;
+	}
 	else if((x<=tankX)&&(y>=tankY)&&(y<=(tankY+2))){return 1;}
 	else{return 0;}
 
+}
+void destruction(int y, int x){
+	int delX=x-x%3+1;
+	int delY=y-y%6+1;
+	deleteBox(delY,delX);
 }

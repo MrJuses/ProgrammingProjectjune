@@ -14,6 +14,17 @@
 #include "lcd.h"
 #include "gameplay.h"
 
+typedef struct{
+	int angle;
+	int speed;
+	int xLoc;
+	int yLoc;
+	int ammo1;
+	int ammo2;
+	int health;
+	int fuel;
+}tank_t;
+
 int main(void){
 	uart_init(256000);
 	clearScreenResCurser();

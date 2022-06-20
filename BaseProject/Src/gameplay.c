@@ -36,7 +36,10 @@ void runGame(){
 	drawTerrain(mapWidth,mapHeight,Height);
 	tank(69,mapHeight,2,Height,2);
 	tank(138,mapHeight,31,Height,4);
-	shoot(25,35,4,35,1,Height,mapHeight);
+	shoot(31,35,4,45,1,Height,mapHeight);
+	tank(69,mapHeight,2,Height,2);
+	tank(138,mapHeight,31,Height,4);
+
 
 }
 

@@ -73,6 +73,13 @@ void smallBox(int yPos, int xPos, int color){
 		printf("%c",219);
 	}
 }
+void deleteSmallBox(int yPos, int xPos){
+	int i;
+	for( i = yPos; i < yPos + 2; i++){
+		moveToXY(xPos,i);
+		printf(" ");
+	}
+}
 void tank(int angle,int xSize, int yPos,int arr[],int color){
 	int i=(xSize-((arr[(yPos)]+1)*3));
 	int j=(6*yPos)+1;
