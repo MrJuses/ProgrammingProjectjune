@@ -37,7 +37,6 @@ void initHeight(int arr[],int size){
 }
 
 void drawTerrain(int yPos,int xPos,int arr[]){
-
 	int i;
 	for(i = 0; i < yPos; i++){
 		int j;
@@ -46,6 +45,7 @@ void drawTerrain(int yPos,int xPos,int arr[]){
 		}
 	}
 }
+
 void drawBox(int yPos,int xPos,int color){
 	int i,j;
 	fgcolor(color);

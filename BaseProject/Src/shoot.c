@@ -49,11 +49,9 @@ void shoot(int y, int x, int v, int angle, int g,int Height[],int baseHeight){
 		yPos=fixY+FIX8_MULT(vY, fixT);
 		bulletX=fixRound(xPos);
 		bulletY=fixRound(yPos)-(fixRound(yPos)+1)%2;
-		check=collision(bulletY, bulletX, Height, baseHeight);
 		smallBox(bulletY,bulletX,11);
 		for(l = 0; l < 70000; l++);
-		//deleteBox(bulletY,bulletX);
-		deleteSmallBox(bulletY,bulletX);
+		check=collision(bulletY, bulletX, Height, baseHeight);
 		t++;
 
 	}
@@ -62,16 +60,24 @@ void shoot(int y, int x, int v, int angle, int g,int Height[],int baseHeight){
 int collision(int y, int x, int Height[], int baseHeight){
 	int tankX=0;
 	int tankY=0;
-	if(baseHeight-((Height[y/6])*3)<=x){
-		destruction(y,x);
+	if(baseHeight-((Height[(y-1)/6])*3)<=x){
+		smallBox(y,x,7);
+		destruction(y,x,Height, baseHeight);
 		return 1;
+	}else if((x<=tankX)&&(y>=tankY)&&(y<=(tankY+2))){
+		deleteSmallBox(y,x);
+
+		return 1;
+	}else{
+		deleteSmallBox(y,x);
+		return 0;
 	}
-	else if((x<=tankX)&&(y>=tankY)&&(y<=(tankY+2))){return 1;}
-	else{return 0;}
 
 }
-void destruction(int y, int x){
-	int delX=x-x%3+1;
+void destruction(int y, int x, int Height[], int baseHeight){
+	int delX=(baseHeight-((Height[(y-1)/6])*3));
 	int delY=y-y%6+1;
 	deleteBox(delY,delX);
+	Height[(y-1)/6]-=1;
+
 }

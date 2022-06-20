@@ -32,7 +32,8 @@ int main(void){
 	setLed(1,1,0);
 	uint8_t variabel;
 	variabel = readJoystick();
-
+	tank_t tank1;
+	tank_t tank2;
 	//printf("\n");
 	//Project start
 	lcdDisplay(10,100,10,0);

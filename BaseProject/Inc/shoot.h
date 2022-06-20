@@ -12,6 +12,6 @@
 //#define FIX16_DIV(a, b) ( ((a) << FIX16_SHIFT) / b )
 void shoot(int y, int x, int v, int angle, int g,int Height[],int baseHeight);
 int collision(int y, int x, int Height[], int baseHeight);
-void destruction(int y, int x);
+void destruction(int y, int x, int Height[], int baseHeight);
 
 #endif /* SHOOT_H_ */
