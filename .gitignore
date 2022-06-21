@@ -388,3 +388,4 @@ BaseProject/Debug/Src/bossKey.d
 BaseProject/Debug/Src/lcd.o
 BaseProject/Debug/Src/lcd.o
 BaseProject/Debug/Src/lcd.o
+BaseProject/SPL/src/stm32f30x.h

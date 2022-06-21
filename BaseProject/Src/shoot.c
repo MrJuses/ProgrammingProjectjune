@@ -25,6 +25,32 @@
 /*int32_t FIX16_MULT(int32_t a, int32_t b){
 	return(((a)*(b))>>16);}*/
 
+uint16_t readButton(){
+	uint16_t white = GPIOD->IDR & (0x0001 << 2); //Read from pin PA1
+	uint16_t red = GPIOC->IDR & (0x0001 << 11); //Read from pin PC11
+
+	uint16_t bit = 0;
+
+	if (white){
+		bit |= 0x004;
+	}
+
+	if (red){
+		bit |= 0x800;
+	}
+}
+
+int shootButton(uint16_t variabel){
+	switch(variabel){
+		case 4: {
+			return 4;
+		}
+		case 2048: {
+			return 2048;
+		}
+	}
+}
+
 void shoot(int Height[] ,int baseHeight, tank_t tiger, tank_t sherman){
 	int check=0;
 	int t=1;

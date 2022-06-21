@@ -18,17 +18,20 @@ int main(void){
 	uart_init(256000);
 	clearScreenResCurser();
 	init();
+	init2();
 	randConfig();
 	setLed(1,1,0);
 	uint8_t variabel;
 	variabel = readJoystick();
 
+	tank_t tank1;
+	tank_t tank2;
 
 	//Project start
 	lcdDisplay(10,100,10,0);
 	int gWidth = 210, gHeight = 100;
 	clearScreenResCurser();
-	menu(gWidth,10,10);
+	menu(gWidth);
 
 
 	//Project start
@@ -39,6 +42,7 @@ int main(void){
 			variabel = readJoystick();
 			MoveWithJoystick(variabel);
 		}
+		joystickLed();
 	}
 
 	return 0;

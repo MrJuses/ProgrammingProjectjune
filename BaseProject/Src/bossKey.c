@@ -12,13 +12,21 @@
 #include "Movement.h"
 #include "shoot.h"
 #include "lcd.h"
+#include "Initialization.h"
 
 
 void bossKey(){
+	uint8_t variabel;
+	variabel = readJoystick();
 	clearScreenResCurser();
 	fgcolor(10);
 	while(1){
 		printf(">insert code here<");
 		for(int i = 0; i < 100000; i++);
+		if (variabel != readJoystick()){
+			variabel = readJoystick();
+			moveMenu(variabel,210);
+			break;
+		}
 	}
 }

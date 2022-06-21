@@ -53,6 +53,7 @@ void deleteBox(int yPos, int xPos){
 			printf(" ");
 		}
 	}
+	moveBack(1);
 }
 void smallBox(int yPos, int xPos, int color){
 	int i;
@@ -68,6 +69,7 @@ void deleteSmallBox(int yPos, int xPos){
 		moveToXY(xPos,i);
 		printf(" ");
 	}
+	moveBack(1);
 }
 void tank(tank_t tiger){
 	int i=tiger.xLoc;//(xSize-((arr[(yPos)]+1)*3));
@@ -111,11 +113,63 @@ void tank(tank_t tiger){
 	}
 }
 
-void powerUp(){
-	printf("");
+void powerUp(int y, int x, int type){
+	moveToXY(x,y);
+	fgcolor(11);
+	for(int i = x; i < x + 3; i++){
+		for(int j = y; j < y + 5; j++){
+			moveToXY(i,j);
+			if(i == x){
+				if(j == y){
+					printf("%c",201);
+				} else if(j == y+4){
+					printf("%c",187);
+				} else{
+					printf("%c",205);
+				}
+			} else if(i == x+2){
+				if(j == y){
+					printf("%c",200);
+				} else if(j == y+4){
+					printf("%c",188);
+				} else{
+					printf("%c",205);
+				}
+			} else{
+				if (j == y || j == y+4){
+					printf("%c",186);
+				} else if(j == y+1){
+					printf("P-U");
+				}
+			}
+		}
+	}
 }
 
+void drawMeteor(int y,int x,int angle){
+	if(angle < 3){
+		smallBox(y+2,x,8);
+		smallBox(y,x+1,8);
+		smallBox(y+2,x+1,1);
+		smallBox(y+4,x+1,1);
+		smallBox(y+2,x+2,9);
+		smallBox(y+4,x+2,9);
+	} else if(angle > 6){
+		smallBox(y+2,x,8);
+		smallBox(y+4,x+1,8);
+		smallBox(y,x+1,1);
+		smallBox(y+2,x+1,1);
+		smallBox(y,x+2,9);
+		smallBox(y+2,x+2,9);
+	} else{
+		smallBox(y+2,x,8);
+		smallBox(y,x+1,1);
+		smallBox(y+4,x+1,1);
+		smallBox(y+2,x+2,1);
+		smallBox(y+2,x+1,9);
+	}
 
+}
 
 
 

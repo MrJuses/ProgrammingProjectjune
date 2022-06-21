@@ -19,7 +19,8 @@ void drawLetter(int yPos, int xPos,int color){
 	printf("%c",219);
 	printf("%c",219);
 }
-void menu(int width,int yPos,int xPos){
+void menu(int width){
+	int yPos = 10,xPos = 10;
 	uint8_t variabel;
 	variabel = readJoystick();
 
@@ -40,23 +41,24 @@ void menu(int width,int yPos,int xPos){
 	moveToXY(xPos+19,width/2-3);
 	printf("Help");
 
-	moveToXY(xPos+35,width/2-12);
+	moveToXY(xPos+45,width/2-12);
 	printf("(Joystick Up -> Start)");
-	moveToXY(xPos+36,width/2-16);
-	printf("(Joystick Center -> Difficulty)");
-	moveToXY(xPos+37,width/2-12);
+	moveToXY(xPos+46,width/2-16);
+	printf("(Joystick Center -> bossKey)");
+	moveToXY(xPos+47,width/2-12);
 	printf("(Joystick Right -> Help)");
 	while(1){
 		if (variabel != readJoystick()){
 			variabel = readJoystick();
-			moveMenu(variabel,width,xPos,yPos);
+			moveMenu(variabel,width);
 		}
 	}
 
 }
-void helpMenu(int width,int yPos,int xPos){
+void helpMenu(int width){
 	uint8_t variabel;
 	variabel = readJoystick();
+	int yPos = 10,xPos = 10;
 
 	clearScreenResCurser();
 	alphabet("help",(width/2)-20,xPos);
@@ -71,13 +73,15 @@ void helpMenu(int width,int yPos,int xPos){
 	moveToXY(xPos+15,width/2-3);
 	printf("Back");
 
-	moveToXY(xPos+35,width/2-11);
+
+
+	moveToXY(xPos+47,width/2-11);
 	printf("(Joystick Left -> Back)");
 
 	while(1){
 		if (variabel != readJoystick()){
 			variabel = readJoystick();
-			moveMenu(variabel,width,xPos,yPos);
+			moveMenu(variabel,width);
 		}
 	}
 }

@@ -11,6 +11,7 @@
 #include "Initialization.h"
 #include "menu.h"
 #include "gameplay.h"
+#include "bossKey.h"
 
 void MoveWithJoystick(uint8_t variabel){
 
@@ -70,7 +71,7 @@ void MoveWithJoystick(uint8_t variabel){
 	}
 }
 
-void moveMenu(uint8_t variabel,int width,int xPos,int yPos){
+void moveMenu(uint8_t variabel,int width){
 	switch(variabel){
 		 case 1: { // UP
 			runGame();
@@ -78,12 +79,13 @@ void moveMenu(uint8_t variabel,int width,int xPos,int yPos){
 		}case 2: { // DOWN
 			break;
 		}case 4:{ // LEFT
-			menu(width,yPos,xPos);
+			menu(width);
 			break;
 		}case 8:{ // RIGHT
-			helpMenu(width,yPos,xPos);
+			helpMenu(width);
 			break;
 		}case 16: { // CENTER
+			bossKey();
 			break;
 
 		}

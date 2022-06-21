@@ -10,7 +10,7 @@
 
 void drawLetter(int yPos,int xPos,int color);
 void alphabet(char string[20],int yPos,int xPos);
-void menu(int width,int yPos,int xPos);
-void helpMenu(int width,int yPos,int xPos);
+void menu(int width);
+void helpMenu(int width);
 
 #endif /* MENU_H_ */

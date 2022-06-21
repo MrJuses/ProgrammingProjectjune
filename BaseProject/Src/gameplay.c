@@ -21,6 +21,8 @@
 #include "gameplay.h"
 #include "random.h"
 #include "structs.h"
+#include "initialization.h"
+#include "menu.h"
 
 void runGame(){
 	tank_t tank1;
@@ -29,6 +31,7 @@ void runGame(){
 
 
 	randConfig();
+	uint16_t variabel;
 	int Height[36];
 	for(int i = 0 ; i < 36 ; i++){
 		if(i == 0){
@@ -60,25 +63,49 @@ void runGame(){
 	tank2.xLoc=mapHeight-(Height[(tank2.yLoc-1)/6]+1)*3;
 	tank2.color=4;
 
-
-
-
-
-
 	clearScreenResCurser();
 	drawTerrain(mapWidth,mapHeight,Height);
 	tank(tank1);
 	tank(tank2);
-	shoot(Height,mapHeight, tank1,tank2);
-	shoot(Height,mapHeight, tank2,tank1);
-	shoot(Height,mapHeight, tank1,tank2);
-	shoot(Height,mapHeight, tank2,tank1);
-	shoot(Height,mapHeight, tank1,tank2);
+
+	randMeteor();
+
 
 	//tank(69,mapHeight,2,Height,2);
 	//tank(138,mapHeight,31,Height,4);
-
+	while(1){
+		if (variabel != readButton()){
+			variabel = readButton();
+			if(shootButton(variabel)==4){
+				shoot(Height,mapHeight, tank1,tank2);
+			} else if(shootButton(variabel)==2048){
+				shoot(Height,mapHeight, tank2,tank1);
+			}
+		} else if (variabel != readJoystick()){
+			variabel = readJoystick();
+			moveMenu(variabel,210);
+		}
+	}
 
 }
 
+void randPower(int type){
+	if(getRand() > 7){
+		int x = getRand()*getRand(), y = getRand()*getRand()*getRand();
+		while(x > 28 || x == 0 || y == 0 || y > 210){
+			x = getRand()*getRand(),y = getRand()*getRand()*getRand();
+		}
+		powerUp(y,x,type);
+	}
+}
 
+void randMeteor(){
+	int angle = getRand();
+	int x = 5, y = getRand()*getRand()*getRand();
+	while(y == 0 || y > 210){
+		y = getRand()*getRand()*getRand();
+	}
+	drawMeteor(y,x,angle);
+	x++;
+	for(int i = 0; i < 10000 ; i++);
+}

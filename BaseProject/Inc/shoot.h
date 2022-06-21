@@ -14,5 +14,7 @@
 void shoot(int Height[] ,int baseHeight, tank_t tiger, tank_t sherman);
 int collision(int y, int x, int Height[], int baseHeight, tank_t tiger, tank_t sherman);
 void destruction(int y, int x, int Height[], int baseHeight);
+int shootButton(uint16_t variabel);
+uint16_t readButton();
 
 #endif /* SHOOT_H_ */
