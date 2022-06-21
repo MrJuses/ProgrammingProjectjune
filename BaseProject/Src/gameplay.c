@@ -55,6 +55,7 @@ void runGame(){
 	}
 	int mapHeight=49;
 	int mapWidth=35;
+	int win=0;
 	powerUp_t triple;
 	tank1.angle=30;
 	tank1.yLoc=31;
@@ -72,21 +73,24 @@ void runGame(){
 	drawTerrain(mapWidth,mapHeight,Height);
 	tank(tank1);
 	tank(tank2);
-	randMeteor(Height,mapHeight,tank1,tank2);
 
-	while(1){
-		if (variabel != readButton()){
-			variabel = readButton();
-			if(shootButton(variabel)==4){
-				shoot(Height,mapHeight, tank1,tank2,triple);
-			} else if(shootButton(variabel)==2048){
-				shoot(Height,mapHeight, tank2,tank1,triple);
-			}
-		} else if (variabel != readJoystick()){
-			variabel = readJoystick();
-			moveMenu(variabel,210);
-		}
-	}
+	while(win==0){
+	turn(Height,mapHeight, tank1,tank2,triple,variabel);
+	turn(Height,mapHeight, tank2,tank1,triple,variabel);
+	if(tank1.health==0){win=1;}
+	else if(tank2.health==0){win=1;}
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 void randPower(int type){

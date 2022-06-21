@@ -51,7 +51,7 @@ int shootButton(uint16_t variabel){
 	}
 }
 
-void shoot(int Height[] ,int baseHeight, tank_t tiger, tank_t sherman, powerUp_t powerUp){
+int shoot(int Height[] ,int baseHeight, tank_t tiger, tank_t sherman, powerUp_t powerUp){
 	int check=0;
 	int t=1;
 	//int l;
@@ -84,7 +84,8 @@ void shoot(int Height[] ,int baseHeight, tank_t tiger, tank_t sherman, powerUp_t
 		t++;
 
 	}
-
+	tiger.ammo1--;
+	return 1;
 }
 int collision(int y, int x, int Height[], int baseHeight, tank_t tiger, tank_t sherman, powerUp_t powerUp){
 
@@ -108,7 +109,7 @@ int collision(int y, int x, int Height[], int baseHeight, tank_t tiger, tank_t s
 			tiger.xLoc=baseHeight-(Height[(tiger.yLoc-1)/6]+1)*3;
 		}
 		tank(tiger);
-
+		tiger.health--;
 		return 1;
 	}else if((x>=sherman.xLoc)&&(y>=sherman.yLoc)&&(y<(sherman.yLoc+6))){
 		deleteBox(sherman.yLoc,sherman.xLoc);
@@ -121,7 +122,7 @@ int collision(int y, int x, int Height[], int baseHeight, tank_t tiger, tank_t s
 			};
 		for(l = 0; l < 70000; l++);
 		tank(sherman);
-
+		sherman.health--;
 		return 1;
 	}else if(baseHeight-((Height[(y-1)/6])*3)<=x){
 		destruction(y,x,Height, baseHeight);
