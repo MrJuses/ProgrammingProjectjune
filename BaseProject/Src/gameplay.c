@@ -26,6 +26,7 @@
 #include "meteor.h"
 
 void runGame(){
+	game_t game;
 	tank_t tank1;
 	tank_t tank2;
 
@@ -42,13 +43,6 @@ void runGame(){
 			int sameLevel = 0;
 			while(!(Height[i-1]+1 == x || Height[i-1]-1 == x || Height[i-1] == x)){
 				x = getRand()/2;
-
-				/*if(Height[i-1] == x){
-					sameLevel++;
-					if(sameLevel >=2){
-						x += 1;
-					}
-				}*/
 			}
 			Height[i] = x;
 		}
@@ -57,28 +51,42 @@ void runGame(){
 	int mapWidth=35;
 	int win=0;
 	powerUp_t triple;
+
+	tank1.health=10;
 	tank1.angle=30;
+	tank1.fuel=10;
+	tank1.ammo1=99;
+	tank1.ammo2=0;
 	tank1.yLoc=31;
 	tank1.color=2;
 	tank1.xLoc=mapHeight-(Height[(tank1.yLoc-1)/6]+1)*3;
-	tank1.fuel=10;
-	tank2.angle=145;
+	tank2.health=10;
+	tank2.angle=150;
+	tank2.fuel=10;
+	tank2.ammo1=99;
+	tank2.ammo2=0;
 	tank2.yLoc=151;
 	tank2.xLoc=mapHeight-(Height[(tank2.yLoc-1)/6]+1)*3;
 	tank2.color=4;
-	tank2.fuel=10;
+
 	triple.x=1;
 	triple.y=1;
+	game.roundNum=1;
 	clearScreenResCurser();
 	drawTerrain(mapWidth,mapHeight,Height);
 	tank(tank1);
 	tank(tank2);
 
 	while(win==0){
-	turn(Height,mapHeight, tank1,tank2,triple,variabel);
-	turn(Height,mapHeight, tank2,tank1,triple,variabel);
-	if(tank1.health==0){win=1;}
-	else if(tank2.health==0){win=1;}
+		roundCount(Height,mapHeight,game,tank1,tank2,triple,variabel);
+		if(tank1.health==0){win=1;}
+		else if(tank2.health==0){win=2;}
+	}
+	if(win == 1){
+		printf("w");
+	} else if(win == 2){
+		printf("w");
+	}
 
 
 

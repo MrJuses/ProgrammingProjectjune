@@ -24,11 +24,11 @@ int main(void){
 	uint8_t variabel;
 	variabel = readJoystick();
 
+	game_t game;
 	tank_t tank1;
 	tank_t tank2;
 
 	//Project start
-	lcdDisplay(10,100,10,0);
 	int gWidth = 210, gHeight = 100;
 	clearScreenResCurser();
 	menu(gWidth);
@@ -42,7 +42,6 @@ int main(void){
 			variabel = readJoystick();
 			MoveWithJoystick(variabel);
 		}
-		joystickLed();
 	}
 
 	return 0;

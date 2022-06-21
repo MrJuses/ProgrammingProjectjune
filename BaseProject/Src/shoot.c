@@ -38,6 +38,7 @@ uint16_t readButton(){
 	if (red){
 		bit |= 0x800;
 	}
+	return bit;
 }
 
 int shootButton(uint16_t variabel){

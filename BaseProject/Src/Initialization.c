@@ -203,7 +203,7 @@ void joystickLed(){
 		//uint8_t two = ADC_GetConversionValue(ADC1);
 		//printf(" | %d | ",one);
 		for(int i = 0 ; i < 100000; i++);
-		if(one < 20){ //move left
+		/*if(one < 20){ //move left
 			deleteBox(tiger.yLoc,tiger.Loc);;
 			tiger.yLoc-=6;
 			tiger.xLoc=mapHeight-(Height[(tiger.yLoc-1)/6]+1)*3;
@@ -213,7 +213,7 @@ void joystickLed(){
 			tiger.yLoc+=6;
 			tiger.xLoc=mapHeight-(Height[(tiger.yLoc-1)/6]+1)*3;
 			tiger.fuel--;
-		}
+		}*/
 }
 void window(int y1, int x1, int y2, int x2){
 	clearScreenResCurser();

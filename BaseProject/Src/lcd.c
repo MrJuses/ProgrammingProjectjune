@@ -14,6 +14,7 @@ uint8_t buffer[512];
 
 void lcdDisplay(int health,int ammo,int fuel,int specialAmmo){
 	lcd_init();
+
 	char string[50];
 	sprintf(string,"Health:               %d",health);
 	lcdWrite(buffer,string,1,0);
@@ -45,35 +46,3 @@ void lcdWrite(uint8_t buffer[],char string[50], int y, int x){
 	}
 	lcd_push_buffer(buffer);
 }
-
-/*void lcdWrapString(char string[50], int y, int x){
-	int stop = 0,layer = 0;
-	int stringLength = strlen(string);
-	if(x==1){
-		layer = 128;
-	} else if(x==2){
-		layer = 256;
-	} else if(x==3){
-		layer = 384;
-	} else{
-		layer = 0;
-	} y += layer;
-	while(stop != 10){
-		int f = y;
-		for(int i = 0; i < stringLength; i++){
-			stop++;
-			for(int j = 0; j < 5; j++){
-				if(f<0){
-					buffer[512-f] = character_data[string[i]-0x20][j];
-				} else{
-					buffer[f] = character_data[string[i]-0x20][j];
-				}
-				f++;
-			}
-		}
-		lcd_push_buffer(buffer);
-		y--;
-		for(int i = 0; i < 100000; i++);
-		memset(buffer,0x00,512);
-	}
-}*/

@@ -22,5 +22,8 @@ typedef struct{
 	int x;
 	int y;
 }powerUp_t;
+typedef struct{
+	int roundNum;
+}game_t;
 
 #endif /* STRUCTS_H_ */

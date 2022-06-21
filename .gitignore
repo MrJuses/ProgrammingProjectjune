@@ -393,3 +393,8 @@ BaseProject/Debug/Src/lcd.o
 BaseProject/Debug/Src/meteor.su
 BaseProject/Debug/Src/meteor.o
 BaseProject/Debug/Src/meteor.d
+BaseProject/Debug/Src/lcd.o
+BaseProject/Debug/Src/lcd.su
+BaseProject/Debug/Src/turn.d
+BaseProject/Debug/Src/turn.o
+BaseProject/Debug/Src/turn.su
