@@ -23,6 +23,7 @@
 #include "structs.h"
 #include "initialization.h"
 #include "menu.h"
+#include "meteor.h"
 
 void runGame(){
 	tank_t tank1;
@@ -59,21 +60,20 @@ void runGame(){
 	tank1.yLoc=31;
 	tank1.color=2;
 	tank1.xLoc=mapHeight-(Height[(tank1.yLoc-1)/6]+1)*3;
+	tank1.fuel=10;
 	tank2.angle=145;
 	tank2.yLoc=151;
 	tank2.xLoc=mapHeight-(Height[(tank2.yLoc-1)/6]+1)*3;
 	tank2.color=4;
+	tank2.fuel=10;
 	triple.x=1;
 	triple.y=1;
 	clearScreenResCurser();
 	drawTerrain(mapWidth,mapHeight,Height);
 	tank(tank1);
 	tank(tank2);
-	randMeteor();
+	randMeteor(Height,mapHeight,tank1,tank2);
 
-
-	//tank(69,mapHeight,2,Height,2);
-	//tank(138,mapHeight,31,Height,4);
 	while(1){
 		if (variabel != readButton()){
 			variabel = readButton();
@@ -87,7 +87,6 @@ void runGame(){
 			moveMenu(variabel,210);
 		}
 	}
-
 }
 
 void randPower(int type){
@@ -100,13 +99,13 @@ void randPower(int type){
 	}
 }
 
-void randMeteor(){
-	int angle = getRand();
-	int x = 5, y = getRand()*getRand()*getRand();
+void randMeteor(int Height[],int baseHeight,tank_t tiger,tank_t sherman){
+	int angle = getRand()*10+225;
+	int x = 0, y = getRand()*getRand()*getRand();
 	while(y == 0 || y > 210){
 		y = getRand()*getRand()*getRand();
 	}
-	drawMeteor(y,x,angle);
 	x++;
 	for(int i = 0; i < 10000 ; i++);
+	meteorFall(angle,x,y,Height,baseHeight,tiger,sherman);
 }

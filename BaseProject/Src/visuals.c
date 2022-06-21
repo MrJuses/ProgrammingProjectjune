@@ -53,7 +53,6 @@ void deleteBox(int yPos, int xPos){
 			printf(" ");
 		}
 	}
-	moveBack(1);
 }
 void smallBox(int yPos, int xPos, int color){
 	int i;
@@ -69,7 +68,6 @@ void deleteSmallBox(int yPos, int xPos){
 		moveToXY(xPos,i);
 		printf(" ");
 	}
-	moveBack(1);
 }
 void tank(tank_t tiger){
 	int i=tiger.xLoc;//(xSize-((arr[(yPos)]+1)*3));
@@ -146,7 +144,8 @@ void powerUp(int y, int x, int type){
 	}
 }
 
-void drawMeteor(int y,int x,int angle){
+/*void drawMeteor(int y,int x,int angle){
+
 	if(angle < 3){
 		smallBox(y+2,x,8);
 		smallBox(y,x+1,8);
@@ -169,7 +168,7 @@ void drawMeteor(int y,int x,int angle){
 		smallBox(y+2,x+1,9);
 	}
 
-}
+}*/
 
 
 

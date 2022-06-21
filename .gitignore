@@ -390,3 +390,6 @@ BaseProject/Debug/Src/lcd.o
 BaseProject/Debug/Src/lcd.o
 BaseProject/SPL/src/stm32f30x.h
 BaseProject/Debug/Src/lcd.o
+BaseProject/Debug/Src/meteor.su
+BaseProject/Debug/Src/meteor.o
+BaseProject/Debug/Src/meteor.d

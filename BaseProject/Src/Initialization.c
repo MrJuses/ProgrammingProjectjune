@@ -199,22 +199,21 @@ void joystickLed(){
 
 		ADCread1();
 		uint8_t one = ADC_GetConversionValue(ADC1);
-		ADCread2();
-		uint8_t two = ADC_GetConversionValue(ADC1);
-		printf(" | %d,%d | ",one,two);
+		//ADCread2();
+		//uint8_t two = ADC_GetConversionValue(ADC1);
+		//printf(" | %d | ",one);
 		for(int i = 0 ; i < 100000; i++);
 		if(one < 20){ //move left
-
+			deleteBox(tiger.yLoc,tiger.Loc);;
+			tiger.yLoc-=6;
+			tiger.xLoc=mapHeight-(Height[(tiger.yLoc-1)/6]+1)*3;
+			tiger.fuel--;
 		} else if(one > 200){ //move right
-
+			deleteBox(tiger.yLoc,tiger.Loc);;
+			tiger.yLoc+=6;
+			tiger.xLoc=mapHeight-(Height[(tiger.yLoc-1)/6]+1)*3;
+			tiger.fuel--;
 		}
-		if(two <=20){ //angle down
-
-		} else if(two > 170){ //angle up
-
-		}
-
-
 }
 void window(int y1, int x1, int y2, int x2){
 	clearScreenResCurser();
