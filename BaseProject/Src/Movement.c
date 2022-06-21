@@ -10,6 +10,7 @@
 #include "ansi.h"
 #include "Initialization.h"
 #include "menu.h"
+#include "gameplay.h"
 
 void MoveWithJoystick(uint8_t variabel){
 

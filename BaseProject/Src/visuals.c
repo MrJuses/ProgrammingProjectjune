@@ -10,6 +10,7 @@
 #include "charset.h"
 #include "visuals.h"
 #include "random.h"
+#include "structs.h"
 
 /*  Value      foreground     Value     foreground
     ------------------------------------------------
@@ -68,45 +69,45 @@ void deleteSmallBox(int yPos, int xPos){
 		printf(" ");
 	}
 }
-void tank(int angle,int xSize, int yPos,int arr[],int color){
-	int i=(xSize-((arr[(yPos)]+1)*3));
-	int j=(6*yPos)+1;
-	if(angle >= 0 && angle <=180){
-		if(angle > 154){
-			smallBox(j,i+2,color);
-			smallBox(j+2,i+1,color);
-			smallBox(j+4,i+2,color);
-			smallBox(j+2,i+2,color);
+void tank(tank_t tiger){
+	int i=tiger.xLoc;//(xSize-((arr[(yPos)]+1)*3));
+	int j=tiger.yLoc;//(6*yPos)+1;
+	if(tiger.angle >= 0 && tiger.angle <=180){
+		if(tiger.angle > 154){
+			smallBox(j,i+2,tiger.color);
+			smallBox(j+2,i+1,tiger.color);
+			smallBox(j+4,i+2,tiger.color);
+			smallBox(j+2,i+2,tiger.color);
 			smallBox(j,i+1,1);
-		} else if(angle > 110){
-			smallBox(j,i+2,color);
-			smallBox(j+2,i+1,color);
-			smallBox(j+4,i+2,color);
-			smallBox(j+2,i+2,color);
+		} else if(tiger.angle > 110){
+			smallBox(j,i+2,tiger.color);
+			smallBox(j+2,i+1,tiger.color);
+			smallBox(j+4,i+2,tiger.color);
+			smallBox(j+2,i+2,tiger.color);
 			smallBox(j,i,1);
-		} else if(angle > 70){
-			smallBox(j,i+2,color);
-			smallBox(j+2,i+1,color);
-			smallBox(j+4,i+2,color);
-			smallBox(j+2,i+2,color);
+		} else if(tiger.angle > 70){
+			smallBox(j,i+2,tiger.color);
+			smallBox(j+2,i+1,tiger.color);
+			smallBox(j+4,i+2,tiger.color);
+			smallBox(j+2,i+2,tiger.color);
 			smallBox(j+2,i,1);
-		} else if(angle > 25){
-			smallBox(j,i+2,color);
-			smallBox(j+2,i+1,color);
-			smallBox(j+4,i+2,color);
-			smallBox(j+2,i+2,color);
+		} else if(tiger.angle > 25){
+			smallBox(j,i+2,tiger.color);
+			smallBox(j+2,i+1,tiger.color);
+			smallBox(j+4,i+2,tiger.color);
+			smallBox(j+2,i+2,tiger.color);
 			smallBox(j+4,i,1);
 		} else{
-			smallBox(j,i+2,color);
-			smallBox(j+2,i+1,color);
-			smallBox(j+4,i+2,color);
-			smallBox(j+2,i+2,color);
+			smallBox(j,i+2,tiger.color);
+			smallBox(j+2,i+1,tiger.color);
+			smallBox(j+4,i+2,tiger.color);
+			smallBox(j+2,i+2,tiger.color);
 			smallBox(j+4,i+1,1);
 		}
-	} else if(angle > 180){
-		angle = 180;
+	} else if(tiger.angle > 180){
+		tiger.angle = 180;
 	} else{
-		angle = 0;
+		tiger.angle = 0;
 	}
 }
 

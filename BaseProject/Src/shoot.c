@@ -18,29 +18,32 @@
 #include "random.h"
 #include "fixed.h"
 #include "shoot.h"
+#include "structs.h"
 #define FIX8_SHIFT 8
 #define FIX8_MULT(a, b) ( ((a)*(b)) >> FIX8_SHIFT )
 #define FIX8_DIV(a, b) ( ((a) << FIX8_SHIFT) / b )
 /*int32_t FIX16_MULT(int32_t a, int32_t b){
 	return(((a)*(b))>>16);}*/
 
-void shoot(int y, int x, int v, int angle, int g,int Height[],int baseHeight){
+void shoot(int Height[] ,int baseHeight, tank_t tiger, tank_t sherman){
 	int check=0;
-	int t=0;
+	int t=1;
 	//int l;
+	int v=4;
+	int g=1;
 	int32_t xPos=0;
 	int32_t yPos=0;
-	int32_t fixX=convert(x);
-	int32_t fixY=convert(y);
+	int32_t fixX=convert(tiger.xLoc+1);
+	int32_t fixY=convert(tiger.yLoc+2);
 	int32_t fixG=convert(g)>>4;
 	int32_t vX;
 	int32_t vY;
 	int32_t fixT;
 	int32_t fixT2;
-	int bulletX=12;
-	int bulletY=12;
-	vX=(FIX8_MULT(convert(v), fixRound(expand(SIN[angle]))));
-	vY=FIX8_MULT(convert(v), fixRound(expand(COS(angle))));
+	int bulletX=tiger.xLoc+1;
+	int bulletY=tiger.yLoc+2;
+	vX=(FIX8_MULT(convert(v), fixRound(expand(SIN[tiger.angle]))));
+	vY=FIX8_MULT(convert(v), fixRound(expand(COS(tiger.angle))));
 	while(check==0){
 		fixT=convert(t);
 		fixT2=FIX8_MULT(fixT, fixT);
@@ -51,22 +54,43 @@ void shoot(int y, int x, int v, int angle, int g,int Height[],int baseHeight){
 		bulletY=fixRound(yPos)-(fixRound(yPos)+1)%2;
 		//smallBox(bulletY,bulletX,11);
 		//for(l = 0; l < 70000; l++);
-		check=collision(bulletY, bulletX, Height, baseHeight);
+		check=collision(bulletY, bulletX, Height, baseHeight, tiger, sherman);
 		t++;
 
 	}
 
 }
-int collision(int y, int x, int Height[], int baseHeight){
-	int tankX=0;
-	int tankY=0;
-	int l;
-	if(baseHeight-((Height[(y-1)/6])*3)<=x){
-		destruction(y,x,Height, baseHeight);
-		return 1;
-	}else if((x<=tankX)&&(y>=tankY)&&(y<=(tankY+2))){
-		deleteSmallBox(y,x);
+int collision(int y, int x, int Height[], int baseHeight, tank_t tiger, tank_t sherman){
 
+	int l;
+	if((x>=tiger.xLoc)&&(y>=tiger.yLoc)&&(y<(tiger.yLoc+6))){
+		deleteBox(tiger.yLoc,tiger.xLoc);
+		for(l = 0; l < 7000000; l++);
+		if(x>=tiger.xLoc+3){
+			int delX=(baseHeight-((Height[(y-1)/6])*3));
+			int delY=y-y%6+1;
+			deleteBox(delY,delX);
+			Height[(y-1)/6]-=1;
+			tiger.xLoc=baseHeight-(Height[(tiger.yLoc-1)/6]+1)*3;
+		}
+		tank(tiger);
+
+		return 1;
+	}else if((x>=sherman.xLoc)&&(y>=sherman.yLoc)&&(y<(sherman.yLoc+6))){
+		deleteBox(sherman.yLoc,sherman.xLoc);
+		if(x>=sherman.xLoc+3){
+			int delX=(baseHeight-((Height[(y-1)/6])*3));
+			int delY=y-y%6+1;
+			deleteBox(delY,delX);
+			Height[(y-1)/6]-=1;
+			sherman.xLoc=baseHeight-(Height[(sherman.yLoc-1)/6]+1)*3;
+			};
+		for(l = 0; l < 7000000; l++);
+		tank(sherman);
+
+		return 1;
+	}else if(baseHeight-((Height[(y-1)/6])*3)<=x){
+		destruction(y,x,Height, baseHeight);
 		return 1;
 	}else{
 		smallBox(y,x,11);

@@ -20,8 +20,14 @@
 #include "shoot.h"
 #include "gameplay.h"
 #include "random.h"
+#include "structs.h"
 
 void runGame(){
+	tank_t tank1;
+	tank_t tank2;
+
+
+
 	randConfig();
 	int Height[36];
 	for(int i = 0 ; i < 36 ; i++){
@@ -43,17 +49,31 @@ void runGame(){
 			Height[i] = x;
 		}
 	}
-		int mapHeight=49;
-		int mapWidth=35;
+	int mapHeight=49;
+	int mapWidth=35;
+	tank1.angle=30;
+	tank1.yLoc=31;
+	tank1.color=2;
+	tank1.xLoc=mapHeight-(Height[(tank1.yLoc-1)/6]+1)*3;
+	tank2.angle=145;
+	tank2.yLoc=151;
+	tank2.xLoc=mapHeight-(Height[(tank2.yLoc-1)/6]+1)*3;
+	tank2.color=4;
+
+
+
+
+
+
 	clearScreenResCurser();
 	drawTerrain(mapWidth,mapHeight,Height);
-	tank(69,mapHeight,2,Height,2);
-	tank(138,mapHeight,31,Height,4);
-	shoot(31,35,4,40,1,Height,mapHeight);
-	shoot(31,35,4,45,1,Height,mapHeight);
-	shoot(31,35,4,20,1,Height,mapHeight);
-	shoot(31,35,4,20,1,Height,mapHeight);
-	shoot(31,35,4,20,1,Height,mapHeight);
+	tank(tank1);
+	tank(tank2);
+	shoot(Height,mapHeight, tank1,tank2);
+	shoot(Height,mapHeight, tank2,tank1);
+	shoot(Height,mapHeight, tank1,tank2);
+	shoot(Height,mapHeight, tank2,tank1);
+	shoot(Height,mapHeight, tank1,tank2);
 
 	//tank(69,mapHeight,2,Height,2);
 	//tank(138,mapHeight,31,Height,4);

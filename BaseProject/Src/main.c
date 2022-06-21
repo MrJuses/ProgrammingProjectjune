@@ -14,17 +14,6 @@
 #include "lcd.h"
 #include "gameplay.h"
 
-typedef struct{
-	int angle;
-	int speed;
-	int xLoc;
-	int yLoc;
-	int ammo1;
-	int ammo2;
-	int health;
-	int fuel;
-}tank_t;
-
 int main(void){
 	uart_init(256000);
 	clearScreenResCurser();
@@ -33,8 +22,7 @@ int main(void){
 	setLed(1,1,0);
 	uint8_t variabel;
 	variabel = readJoystick();
-	tank_t tank1;
-	tank_t tank2;
+
 
 	//Project start
 	lcdDisplay(10,100,10,0);
