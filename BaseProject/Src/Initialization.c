@@ -203,14 +203,14 @@ void joystickLed(){
 		uint8_t two = ADC_GetConversionValue(ADC1);
 		printf(" | %d,%d | ",one,two);
 		for(int i = 0 ; i < 100000; i++);
-		if(one < 20){
+		if(one < 20){ //move left
 
-		} else if(one > 200){
+		} else if(one > 200){ //move right
 
 		}
-		if(two <=20){
+		if(two <=20){ //angle down
 
-		} else if(two > 170){
+		} else if(two > 170){ //angle up
 
 		}
 
