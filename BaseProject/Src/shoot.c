@@ -51,7 +51,7 @@ int shootButton(uint16_t variabel){
 	}
 }
 
-void shoot(int Height[] ,int baseHeight, tank_t tiger, tank_t sherman){
+void shoot(int Height[] ,int baseHeight, tank_t tiger, tank_t sherman, powerUp_t powerUp){
 	int check=0;
 	int t=1;
 	//int l;
@@ -80,18 +80,24 @@ void shoot(int Height[] ,int baseHeight, tank_t tiger, tank_t sherman){
 		bulletY=fixRound(yPos)-(fixRound(yPos)+1)%2;
 		//smallBox(bulletY,bulletX,11);
 		//for(l = 0; l < 70000; l++);
-		check=collision(bulletY, bulletX, Height, baseHeight, tiger, sherman);
+		check=collision(bulletY, bulletX, Height, baseHeight, tiger, sherman, powerUp);
 		t++;
 
 	}
 
 }
-int collision(int y, int x, int Height[], int baseHeight, tank_t tiger, tank_t sherman){
+int collision(int y, int x, int Height[], int baseHeight, tank_t tiger, tank_t sherman, powerUp_t powerUp){
 
 	int l;
-	if((x>=tiger.xLoc)&&(y>=tiger.yLoc)&&(y<(tiger.yLoc+6))){
+	if((x<powerUp.x+3)&&(x>=powerUp.x)&&(y>=powerUp.y)&&(y<(powerUp.y+6))){
+		deleteBox(powerUp.y,powerUp.x);
+		tiger.ammo2++;
+		powerUp.x=1;
+		powerUp.y=1;
+		return 1;
+	}if((x>=tiger.xLoc)&&(y>=tiger.yLoc)&&(y<(tiger.yLoc+6))){
 		deleteBox(tiger.yLoc,tiger.xLoc);
-		for(l = 0; l < 7000000; l++);
+		for(l = 0; l < 70000; l++);
 		if(x>=tiger.xLoc+3){
 			int delX=(baseHeight-((Height[(y-1)/6])*3));
 			int delY=y-y%6+1;
@@ -111,7 +117,7 @@ int collision(int y, int x, int Height[], int baseHeight, tank_t tiger, tank_t s
 			Height[(y-1)/6]-=1;
 			sherman.xLoc=baseHeight-(Height[(sherman.yLoc-1)/6]+1)*3;
 			};
-		for(l = 0; l < 7000000; l++);
+		for(l = 0; l < 70000; l++);
 		tank(sherman);
 
 		return 1;

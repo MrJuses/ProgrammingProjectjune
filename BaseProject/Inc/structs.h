@@ -18,5 +18,9 @@ typedef struct{
 	int fuel;
 	int color;
 }tank_t;
+typedef struct{
+	int x;
+	int y;
+}powerUp_t;
 
 #endif /* STRUCTS_H_ */

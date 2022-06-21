@@ -54,6 +54,7 @@ void runGame(){
 	}
 	int mapHeight=49;
 	int mapWidth=35;
+	powerUp_t triple;
 	tank1.angle=30;
 	tank1.yLoc=31;
 	tank1.color=2;
@@ -62,12 +63,12 @@ void runGame(){
 	tank2.yLoc=151;
 	tank2.xLoc=mapHeight-(Height[(tank2.yLoc-1)/6]+1)*3;
 	tank2.color=4;
-
+	triple.x=1;
+	triple.y=1;
 	clearScreenResCurser();
 	drawTerrain(mapWidth,mapHeight,Height);
 	tank(tank1);
 	tank(tank2);
-
 	randMeteor();
 
 
@@ -77,9 +78,9 @@ void runGame(){
 		if (variabel != readButton()){
 			variabel = readButton();
 			if(shootButton(variabel)==4){
-				shoot(Height,mapHeight, tank1,tank2);
+				shoot(Height,mapHeight, tank1,tank2,triple);
 			} else if(shootButton(variabel)==2048){
-				shoot(Height,mapHeight, tank2,tank1);
+				shoot(Height,mapHeight, tank2,tank1,triple);
 			}
 		} else if (variabel != readJoystick()){
 			variabel = readJoystick();
