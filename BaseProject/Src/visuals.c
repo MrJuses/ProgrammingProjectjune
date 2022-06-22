@@ -69,45 +69,46 @@ void deleteSmallBox(int yPos, int xPos){
 		printf(" ");
 	}
 }
-void tank(tank_t tiger){
-	int i=tiger.xLoc;//(xSize-((arr[(yPos)]+1)*3));
-	int j=tiger.yLoc;//(6*yPos)+1;
-	if(tiger.angle >= 0 && tiger.angle <=180){
-		if(tiger.angle > 154){
-			smallBox(j,i+2,tiger.color);
-			smallBox(j+2,i+1,tiger.color);
-			smallBox(j+4,i+2,tiger.color);
-			smallBox(j+2,i+2,tiger.color);
+void tank(tank_t * tiger){
+	int i=tiger->xLoc;//(xSize-((arr[(yPos)]+1)*3));
+	int j=tiger->yLoc;//(6*yPos)+1;
+	int k=tiger->color;
+	if(tiger->angle >= 0 && tiger->angle <=180){
+		if(tiger->angle > 154){
+			smallBox(j,i+2,k);
+			smallBox(j+2,i+1,k);
+			smallBox(j+4,i+2,k);
+			smallBox(j+2,i+2,k);
 			smallBox(j,i+1,1);
-		} else if(tiger.angle > 110){
-			smallBox(j,i+2,tiger.color);
-			smallBox(j+2,i+1,tiger.color);
-			smallBox(j+4,i+2,tiger.color);
-			smallBox(j+2,i+2,tiger.color);
+		} else if(tiger->angle > 110){
+			smallBox(j,i+2,k);
+			smallBox(j+2,i+1,k);
+			smallBox(j+4,i+2,k);
+			smallBox(j+2,i+2,k);
 			smallBox(j,i,1);
-		} else if(tiger.angle > 70){
-			smallBox(j,i+2,tiger.color);
-			smallBox(j+2,i+1,tiger.color);
-			smallBox(j+4,i+2,tiger.color);
-			smallBox(j+2,i+2,tiger.color);
+		} else if(tiger->angle > 70){
+			smallBox(j,i+2,k);
+			smallBox(j+2,i+1,k);
+			smallBox(j+4,i+2,k);
+			smallBox(j+2,i+2,k);
 			smallBox(j+2,i,1);
-		} else if(tiger.angle > 25){
-			smallBox(j,i+2,tiger.color);
-			smallBox(j+2,i+1,tiger.color);
-			smallBox(j+4,i+2,tiger.color);
-			smallBox(j+2,i+2,tiger.color);
+		} else if(tiger->angle > 25){
+			smallBox(j,i+2,k);
+			smallBox(j+2,i+1,k);
+			smallBox(j+4,i+2,k);
+			smallBox(j+2,i+2,k);
 			smallBox(j+4,i,1);
 		} else{
-			smallBox(j,i+2,tiger.color);
-			smallBox(j+2,i+1,tiger.color);
-			smallBox(j+4,i+2,tiger.color);
-			smallBox(j+2,i+2,tiger.color);
+			smallBox(j,i+2,k);
+			smallBox(j+2,i+1,k);
+			smallBox(j+4,i+2,k);
+			smallBox(j+2,i+2,k);
 			smallBox(j+4,i+1,1);
 		}
-	} else if(tiger.angle > 180){
-		tiger.angle = 180;
+	} else if(tiger->angle > 180){
+		tiger->angle = 180;
 	} else{
-		tiger.angle = 0;
+		tiger->angle = 0;
 	}
 }
 

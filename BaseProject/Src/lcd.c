@@ -9,20 +9,21 @@
 #include "charset.h"
 #include "lcd.h"
 #include "math.h"
+#include "structs.h"
 
 uint8_t buffer[512];
 
-void lcdDisplay(int health,int ammo,int fuel,int specialAmmo){
+void lcdDisplay(tank_t * tiger){
 	lcd_init();
 
 	char string[50];
-	sprintf(string,"Health:               %d",health);
+	sprintf(string,"Health:               %d",tiger->health);
 	lcdWrite(buffer,string,1,0);
-	sprintf(string,"Fuel:                 %d",fuel);
+	sprintf(string,"Fuel:                 %d",tiger->fuel);
 	lcdWrite(buffer,string,1,1);
-	sprintf(string,"Ammo:                 %d",ammo);
+	sprintf(string,"Ammo:                 %d",tiger->ammo1);
 	lcdWrite(buffer,string,1,2);
-	sprintf(string,"Special Ammo:         %d",specialAmmo);
+	sprintf(string,"Special Ammo:         %d",tiger->ammo2);
 	lcdWrite(buffer,string,1,3);
 	lcd_push_buffer(buffer);
 }
@@ -30,7 +31,7 @@ void lcdDisplay(int health,int ammo,int fuel,int specialAmmo){
 void lcdWrite(uint8_t buffer[],char string[50], int y, int x){
 	int stringLength = strlen(string);
 	if(x==0){
-		y += 0;
+		y = 0;
 	} else if(x==1){
 		y += 128;
 	} else if(x==2){
@@ -45,4 +46,5 @@ void lcdWrite(uint8_t buffer[],char string[50], int y, int x){
 		}
 	}
 	lcd_push_buffer(buffer);
+	y = 1;
 }

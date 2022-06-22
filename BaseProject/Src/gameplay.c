@@ -24,7 +24,8 @@
 #include "initialization.h"
 #include "menu.h"
 #include "meteor.h"
-
+#include "turn.h"
+#include "lcd.h"
 void runGame(){
 	game_t game;
 	tank_t tank1;
@@ -33,14 +34,14 @@ void runGame(){
 
 
 	randConfig();
-	uint16_t variabel;
+	uint16_t variabel=0;
 	int Height[36];
 	for(int i = 0 ; i < 36 ; i++){
 		if(i == 0){
 			Height[i] = getRand()/2;
 		} else{
 			int x = getRand()/2;
-			int sameLevel = 0;
+			//int sameLevel = 0;
 			while(!(Height[i-1]+1 == x || Height[i-1]-1 == x || Height[i-1] == x)){
 				x = getRand()/2;
 			}
@@ -74,18 +75,36 @@ void runGame(){
 	game.roundNum=1;
 	clearScreenResCurser();
 	drawTerrain(mapWidth,mapHeight,Height);
-	tank(tank1);
-	tank(tank2);
+	tank(&tank1);
+	tank(&tank2);
+
+	shoot(Height,mapHeight, &tank1, &tank2,triple);
+	shoot(Height,mapHeight, &tank1, &tank2,triple);
+	shoot(Height,mapHeight, &tank1, &tank2,triple);
+	shoot(Height,mapHeight, &tank1, &tank2,triple);
+	shoot(Height,mapHeight, &tank1, &tank2,triple);
+	shoot(Height,mapHeight, &tank1, &tank2,triple);
 
 	while(win==0){
-		roundCount(Height,mapHeight,game,tank1,tank2,triple,variabel);
-		if(tank1.health==0){win=1;}
-		else if(tank2.health==0){win=2;}
-	}
+		for(int i = 0; i < game.roundNum; i++){
+			randMeteor(Height,mapHeight,&tank1,&tank2);
+		}
+	setLed(0,1,1);
+	//lcdDisplay(&tank2);
+	turn(Height,mapHeight,&tank1,&tank2,triple,variabel);
+
+	setLed(1,0,1);
+	//lcdDisplay(&tank2);
+	turn(Height,mapHeight,&tank2,&tank1,triple,variabel);
+
+	game.roundNum++;
+	if(tank2.health<=0){win=1;}
+	else if(tank1.health<=0){win=2;}
+
 	if(win == 1){
-		printf("w");
+		printf("Player 1 has won");
 	} else if(win == 2){
-		printf("w");
+		printf("Player 2 has won");
 	}
 
 
@@ -98,7 +117,7 @@ void runGame(){
 
 
 
-
+	}
 }
 
 void randPower(int type){
@@ -111,7 +130,7 @@ void randPower(int type){
 	}
 }
 
-void randMeteor(int Height[],int baseHeight,tank_t tiger,tank_t sherman){
+void randMeteor(int Height[],int baseHeight,tank_t * tiger,tank_t * sherman){
 	int angle = getRand()*10+225;
 	int x = 0, y = getRand()*getRand()*getRand();
 	while(y == 0 || y > 210){
@@ -119,5 +138,5 @@ void randMeteor(int Height[],int baseHeight,tank_t tiger,tank_t sherman){
 	}
 	x++;
 	for(int i = 0; i < 10000 ; i++);
-	meteorFall(angle,x,y,Height,baseHeight,tiger,sherman);
+	meteorFall(angle,x,y,Height,baseHeight, &*tiger, &*sherman);
 }

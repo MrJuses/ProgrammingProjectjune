@@ -26,32 +26,20 @@
 #include "meteor.h"
 #include "lcd.h"
 
-void roundCount(int Height[] ,int baseHeight,game_t game,tank_t tiger, tank_t sherman, powerUp_t powerUp, uint16_t variabel){
-	for(int i = 0; i < game.roundNum; i++){
-		randMeteor(Height,baseHeight,tiger,sherman);
-	}
-	lcdDisplay(tiger.health,tiger.ammo1,tiger.fuel,tiger.ammo2);
-	turn(Height,baseHeight,tiger,sherman,powerUp,variabel);
 
-	lcdDisplay(sherman.health,sherman.ammo1,sherman.fuel,sherman.ammo2);
-	turn(Height,baseHeight,sherman,tiger,powerUp,variabel);
 
-	game.roundNum++;
-
-}
-
-void turn(int Height[] ,int baseHeight, tank_t tiger, tank_t sherman, powerUp_t powerUp, uint16_t variabel){
+void turn(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerUp_t powerUp, uint16_t variabel){
 	int fire=0;
 
 	while(fire==0){
 			if (variabel != readButton()){
 				variabel = readButton();
 				if(shootButton(variabel)==4){
-					fire=shoot(Height,baseHeight, tiger,sherman,powerUp);
+					fire=shoot(Height,baseHeight, &*tiger,&*sherman,powerUp);
 				} else if(shootButton(variabel)==2048){
-					shoot(Height,baseHeight, tiger,sherman,powerUp);
-					shoot(Height,baseHeight, tiger,sherman,powerUp);
-					fire=shoot(Height,baseHeight, tiger,sherman,powerUp);
+					shoot(Height,baseHeight, &*tiger, &*sherman,powerUp);
+					shoot(Height,baseHeight, &*tiger, &*sherman,powerUp);
+					fire=shoot(Height,baseHeight, &*tiger, &*sherman,powerUp);
 				}
 			} else if (variabel != readJoystick()){
 				variabel = readJoystick();

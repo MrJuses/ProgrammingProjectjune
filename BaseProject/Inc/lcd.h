@@ -7,8 +7,8 @@
 
 #ifndef LCD_H_
 #define LCD_H_
-
-void lcdDisplay(int health, int ammo,int fuel,int specialAmmo);
+#include "structs.h"
+void lcdDisplay(tank_t * tiger);
 void lcdWrite(uint8_t buffer[],char string[50], int y, int x);
 
 

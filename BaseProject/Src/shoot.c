@@ -44,15 +44,20 @@ uint16_t readButton(){
 int shootButton(uint16_t variabel){
 	switch(variabel){
 		case 4: {
+
 			return 4;
+			break;
 		}
 		case 2048: {
+
 			return 2048;
+			break;
 		}
+
 	}
 }
 
-int shoot(int Height[] ,int baseHeight, tank_t tiger, tank_t sherman, powerUp_t powerUp){
+int shoot(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerUp_t powerUp){
 	int check=0;
 	int t=1;
 	//int l;
@@ -60,17 +65,17 @@ int shoot(int Height[] ,int baseHeight, tank_t tiger, tank_t sherman, powerUp_t 
 	int g=1;
 	int32_t xPos=0;
 	int32_t yPos=0;
-	int32_t fixX=convert(tiger.xLoc+1);
-	int32_t fixY=convert(tiger.yLoc+2);
+	int32_t fixX=convert(tiger->xLoc+1);
+	int32_t fixY=convert(tiger->yLoc+2);
 	int32_t fixG=convert(g)>>4;
 	int32_t vX;
 	int32_t vY;
 	int32_t fixT;
 	int32_t fixT2;
-	int bulletX=tiger.xLoc+1;
-	int bulletY=tiger.yLoc+2;
-	vX=(FIX8_MULT(convert(v), fixRound(expand(SIN[tiger.angle]))));
-	vY=FIX8_MULT(convert(v), fixRound(expand(COS(tiger.angle))));
+	int bulletX=tiger->xLoc+1;
+	int bulletY=tiger->yLoc+2;
+	vX=(FIX8_MULT(convert(v), fixRound(expand(SIN[tiger->angle]))));
+	vY=FIX8_MULT(convert(v), fixRound(expand(COS(tiger->angle))));
 	while(check==0){
 		fixT=convert(t);
 		fixT2=FIX8_MULT(fixT, fixT);
@@ -81,49 +86,49 @@ int shoot(int Height[] ,int baseHeight, tank_t tiger, tank_t sherman, powerUp_t 
 		bulletY=fixRound(yPos)-(fixRound(yPos)+1)%2;
 		//smallBox(bulletY,bulletX,11);
 		//for(l = 0; l < 70000; l++);
-		check=collision(bulletY, bulletX, Height, baseHeight, tiger, sherman, powerUp);
+		check=collision(bulletY, bulletX, Height, baseHeight, &*tiger, &*sherman, powerUp);
 		t++;
 
 	}
-	tiger.ammo1--;
+	tiger->ammo1=tiger->ammo1-1;
 	return 1;
 }
-int collision(int y, int x, int Height[], int baseHeight, tank_t tiger, tank_t sherman, powerUp_t powerUp){
+int collision(int y, int x, int Height[], int baseHeight, tank_t * tiger, tank_t * sherman, powerUp_t powerUp){
 
 	int l;
 	if((y<=0)||(y>=210)){
 		return 1;
 	}else if((x<powerUp.x+3)&&(x>=powerUp.x)&&(y>=powerUp.y)&&(y<(powerUp.y+6))){
 		deleteBox(powerUp.y,powerUp.x);
-		tiger.ammo2++;
+		tiger->ammo2=tiger->ammo2+1;
 		powerUp.x=1;
 		powerUp.y=1;
 		return 1;
-	}if((x>=tiger.xLoc)&&(y>=tiger.yLoc)&&(y<(tiger.yLoc+6))){
-		deleteBox(tiger.yLoc,tiger.xLoc);
+	}if((x>=tiger->xLoc)&&(y>=tiger->yLoc)&&(y<(tiger->yLoc+6))){
+		deleteBox(tiger->yLoc,tiger->xLoc);
 		for(l = 0; l < 70000; l++);
-		if(x>=tiger.xLoc+3){
+		if(x>=tiger->xLoc+3){
 			int delX=(baseHeight-((Height[(y-1)/6])*3));
 			int delY=y-y%6+1;
 			deleteBox(delY,delX);
 			Height[(y-1)/6]-=1;
-			tiger.xLoc=baseHeight-(Height[(tiger.yLoc-1)/6]+1)*3;
+			tiger->xLoc=baseHeight-(Height[(tiger->yLoc-1)/6]+1)*3;
 		}
-		tank(tiger);
-		tiger.health--;
+		tank(&*tiger);
+		tiger->health=tiger->health-1;
 		return 1;
-	}else if((x>=sherman.xLoc)&&(y>=sherman.yLoc)&&(y<(sherman.yLoc+6))){
-		deleteBox(sherman.yLoc,sherman.xLoc);
-		if(x>=sherman.xLoc+3){
+	}else if((x>=sherman->xLoc)&&(y>=sherman->yLoc)&&(y<(sherman->yLoc+6))){
+		deleteBox(sherman->yLoc,sherman->xLoc);
+		if(x>=sherman->xLoc+3){
 			int delX=(baseHeight-((Height[(y-1)/6])*3));
 			int delY=y-y%6+1;
 			deleteBox(delY,delX);
 			Height[(y-1)/6]-=1;
-			sherman.xLoc=baseHeight-(Height[(sherman.yLoc-1)/6]+1)*3;
-			};
+			sherman->xLoc=baseHeight-(Height[(sherman->yLoc-1)/6]+1)*3;
+			}
 		for(l = 0; l < 70000; l++);
-		tank(sherman);
-		sherman.health--;
+		tank(&*sherman);
+		sherman->health=sherman->health-1;
 		return 1;
 	}else if(baseHeight-((Height[(y-1)/6])*3)<=x){
 		destruction(y,x,Height, baseHeight);

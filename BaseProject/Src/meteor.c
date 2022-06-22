@@ -22,7 +22,7 @@
 	return(((a)*(b))>>16);}*/
 
 
-void meteorFall(int angle, int x, int y,int Height[] ,int baseHeight, tank_t tiger, tank_t sherman){
+void meteorFall(int angle, int x, int y,int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman){
 	int check=0;
 	int t=1;
 	//int l;
@@ -46,42 +46,42 @@ void meteorFall(int angle, int x, int y,int Height[] ,int baseHeight, tank_t tig
 		bulletY=fixRound(yPos)-(fixRound(yPos)+1)%2;
 		//smallBox(bulletY,bulletX,11);
 		//for(l = 0; l < 70000; l++);
-		check=meteorCollision(bulletY, bulletX, Height, baseHeight, tiger, sherman);
+		check=meteorCollision(bulletY, bulletX, Height, baseHeight, &tiger, &sherman);
 		t++;
 
 	}
 
 }
-int meteorCollision(int y, int x, int Height[], int baseHeight, tank_t tiger, tank_t sherman){
+int meteorCollision(int y, int x, int Height[], int baseHeight, tank_t * tiger, tank_t * sherman){
 
 	int l;
 	if((y<=0)||(y>=210)){
 		return 1;
-	}else if((x>=tiger.xLoc)&&(y>=tiger.yLoc)&&(y<(tiger.yLoc+6))){
-		deleteBox(tiger.yLoc,tiger.xLoc);
+	}else if((x>=tiger->xLoc)&&(y>=tiger->yLoc)&&(y<(tiger->yLoc+6))){
+		deleteBox(tiger->yLoc,tiger->xLoc);
 		for(l = 0; l < 7000000; l++);
-		if(x>=tiger.xLoc+3){
+		if(x>=tiger->xLoc+3){
 			int delX=(baseHeight-((Height[(y-1)/6])*3));
 			int delY=y-y%6+1;
 			deleteBox(delY,delX);
 			Height[(y-1)/6]-=1;
-			tiger.xLoc=baseHeight-(Height[(tiger.yLoc-1)/6]+1)*3;
+			tiger->xLoc=baseHeight-(Height[(tiger->yLoc-1)/6]+1)*3;
 		}
-		tank(tiger);
-
+		tank(&tiger);
+		tiger->health=tiger->health-1;
 		return 1;
-	}else if((x>=sherman.xLoc)&&(y>=sherman.yLoc)&&(y<(sherman.yLoc+6))){
-		deleteBox(sherman.yLoc,sherman.xLoc);
-		if(x>=sherman.xLoc+3){
+	}else if((x>=sherman->xLoc)&&(y>=sherman->yLoc)&&(y<(sherman->yLoc+6))){
+		deleteBox(sherman->yLoc,sherman->xLoc);
+		if(x>=sherman->xLoc+3){
 			int delX=(baseHeight-((Height[(y-1)/6])*3));
 			int delY=y-y%6+1;
 			deleteBox(delY,delX);
 			Height[(y-1)/6]-=1;
-			sherman.xLoc=baseHeight-(Height[(sherman.yLoc-1)/6]+1)*3;
+			sherman->xLoc=baseHeight-(Height[(sherman->yLoc-1)/6]+1)*3;
 			};
 		for(l = 0; l < 7000000; l++);
-		tank(sherman);
-
+		tank(&sherman);
+		sherman->health=sherman->health-1;
 		return 1;
 	}else if(baseHeight-((Height[(y-1)/6])*3)<=x){
 		meteorDestruction(y,x,Height, baseHeight);
@@ -89,7 +89,7 @@ int meteorCollision(int y, int x, int Height[], int baseHeight, tank_t tiger, ta
 	}else{
 		smallBox(y,x,13);
 		for(l = 0; l < 70000; l++);
-		deleteBox(y,x);
+		deleteSmallBox(y,x);
 		return 0;
 	}
 

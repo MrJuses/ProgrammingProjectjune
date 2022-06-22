@@ -9,7 +9,7 @@
 #define GAMEPLAY_H_
 void runGame();
 void randPower(int type);
-void randMeteor(int Height[],int baseHeight,tank_t tiger,tank_t sherman);
+void randMeteor(int Height[],int baseHeight,tank_t * tiger,tank_t * sherman);
 
 
 #endif /* GAMEPLAY_H_ */
