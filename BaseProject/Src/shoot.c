@@ -84,8 +84,6 @@ int shoot(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerU
 		yPos=fixY+FIX8_MULT(vY, fixT);
 		bulletX=fixRound(xPos);
 		bulletY=fixRound(yPos)-(fixRound(yPos)+1)%2;
-		//smallBox(bulletY,bulletX,11);
-		//for(l = 0; l < 70000; l++);
 		check=collision(bulletY, bulletX, Height, baseHeight, &*tiger, &*sherman, powerUp);
 		t++;
 

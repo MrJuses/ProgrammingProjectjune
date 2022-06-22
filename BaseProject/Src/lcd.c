@@ -11,11 +11,9 @@
 #include "math.h"
 #include "structs.h"
 
-uint8_t buffer[512];
-
 void lcdDisplay(tank_t * tiger){
-	lcd_init();
-
+	uint8_t buffer[512];
+	memset(buffer,0x00,512);
 	char string[50];
 	sprintf(string,"Health:               %d",tiger->health);
 	lcdWrite(buffer,string,1,0);
@@ -45,6 +43,4 @@ void lcdWrite(uint8_t buffer[],char string[50], int y, int x){
 			y++;
 		}
 	}
-	lcd_push_buffer(buffer);
-	y = 1;
 }

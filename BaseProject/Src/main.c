@@ -13,6 +13,9 @@
 #include "shoot.h"
 #include "lcd.h"
 #include "gameplay.h"
+#include "Endgame.h"
+#include "Vinkel.h"
+#include "Timer.h"
 
 int main(void){
 	uart_init(256000);
@@ -20,7 +23,7 @@ int main(void){
 	init();
 	init2();
 	randConfig();
-	setLed(1,1,0);
+	setLed(0,1,0);
 	uint8_t variabel;
 	variabel = readJoystick();
 
@@ -40,9 +43,8 @@ int main(void){
 	while(1){
 		if (variabel != readJoystick()){
 			variabel = readJoystick();
-			MoveWithJoystick(variabel);
+			//MoveWithJoystick(variabel);
 		}
 	}
-
 	return 0;
 }

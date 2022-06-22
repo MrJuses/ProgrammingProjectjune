@@ -8,7 +8,7 @@
 #ifndef TURN_H_
 #define TURN_H_
 
-void turn(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerUp_t powerUp, uint16_t variabel);
+void turn(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerUp_t powerUp, uint16_t variabel,int win,int t);
 
 
 #endif /* TURN_H_ */

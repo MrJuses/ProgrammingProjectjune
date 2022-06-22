@@ -400,3 +400,14 @@ BaseProject/Debug/Src/turn.o
 BaseProject/Debug/Src/turn.su
 *.o
 *.su
+BaseProject/Debug/Src/Endgame.d
+BaseProject/Debug/Src/Endgame.o
+BaseProject/Debug/Src/Endgame.su
+BaseProject/Debug/Src/lcd.o
+BaseProject/Debug/Src/lcd.su
+BaseProject/Debug/Src/Timer.d
+BaseProject/Debug/Src/Timer.o
+BaseProject/Debug/Src/Timer.su
+BaseProject/Debug/Src/Vinkel.d
+BaseProject/Debug/Src/Vinkel.o
+BaseProject/Debug/Src/Vinkel.su

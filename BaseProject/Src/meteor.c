@@ -15,6 +15,7 @@
 #include "structs.h"
 #include "gameplay.h"
 #include "meteor.h"
+#include "turn.h"
 #define FIX8_SHIFT 8
 #define FIX8_MULT(a, b) ( ((a)*(b)) >> FIX8_SHIFT )
 #define FIX8_DIV(a, b) ( ((a) << FIX8_SHIFT) / b )
@@ -22,11 +23,12 @@
 	return(((a)*(b))>>16);}*/
 
 
+
 void meteorFall(int angle, int x, int y,int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman){
 	int check=0;
 	int t=1;
 	//int l;
-	int v=2;
+	int v=1;
 	int32_t xPos=0;
 	int32_t yPos=0;
 	int32_t fixX=convert(x);
@@ -46,7 +48,7 @@ void meteorFall(int angle, int x, int y,int Height[] ,int baseHeight, tank_t * t
 		bulletY=fixRound(yPos)-(fixRound(yPos)+1)%2;
 		//smallBox(bulletY,bulletX,11);
 		//for(l = 0; l < 70000; l++);
-		check=meteorCollision(bulletY, bulletX, Height, baseHeight, &tiger, &sherman);
+		check=meteorCollision(bulletY, bulletX, Height, baseHeight, &*tiger, &*sherman);
 		t++;
 
 	}
@@ -59,7 +61,7 @@ int meteorCollision(int y, int x, int Height[], int baseHeight, tank_t * tiger, 
 		return 1;
 	}else if((x>=tiger->xLoc)&&(y>=tiger->yLoc)&&(y<(tiger->yLoc+6))){
 		deleteBox(tiger->yLoc,tiger->xLoc);
-		for(l = 0; l < 7000000; l++);
+		for(l = 0; l < 70000; l++);
 		if(x>=tiger->xLoc+3){
 			int delX=(baseHeight-((Height[(y-1)/6])*3));
 			int delY=y-y%6+1;
@@ -67,7 +69,7 @@ int meteorCollision(int y, int x, int Height[], int baseHeight, tank_t * tiger, 
 			Height[(y-1)/6]-=1;
 			tiger->xLoc=baseHeight-(Height[(tiger->yLoc-1)/6]+1)*3;
 		}
-		tank(&tiger);
+		tank(&*tiger);
 		tiger->health=tiger->health-1;
 		return 1;
 	}else if((x>=sherman->xLoc)&&(y>=sherman->yLoc)&&(y<(sherman->yLoc+6))){
@@ -79,8 +81,8 @@ int meteorCollision(int y, int x, int Height[], int baseHeight, tank_t * tiger, 
 			Height[(y-1)/6]-=1;
 			sherman->xLoc=baseHeight-(Height[(sherman->yLoc-1)/6]+1)*3;
 			};
-		for(l = 0; l < 7000000; l++);
-		tank(&sherman);
+		for(l = 0; l < 70000; l++);
+		tank(&*sherman);
 		sherman->health=sherman->health-1;
 		return 1;
 	}else if(baseHeight-((Height[(y-1)/6])*3)<=x){

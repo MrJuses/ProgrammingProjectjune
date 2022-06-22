@@ -14,6 +14,18 @@
 
 void init(){
 
+	// TIMER INITIALIZE
+
+	RCC->APB1ENR |= RCC_APB1Periph_TIM2;
+	TIM2->CR1 = 0x0000;
+	TIM2->ARR = 0xF9FF;
+	TIM2->PSC = 0x0009;
+	TIM2->CR1 = 0x0001;
+	TIM2->DIER |= 0x0001;
+
+	NVIC_SetPriority(TIM2_IRQn, 0);
+	NVIC_EnableIRQ(TIM2_IRQn);
+
 	RCC->AHBENR |= RCC_AHBPeriph_GPIOA; // Enable clock for GPIO Port A
 
 	// Set pin PA1 to input
@@ -196,24 +208,6 @@ void joystickLed(){
 		if (center){
 			GPIOC->ODR |= (0x0001 << 7); // Green PRINT MAGENTA
 		}
-
-		ADCread1();
-		uint8_t one = ADC_GetConversionValue(ADC1);
-		//ADCread2();
-		//uint8_t two = ADC_GetConversionValue(ADC1);
-		//printf(" | %d | ",one);
-		for(int i = 0 ; i < 100000; i++);
-		/*if(one < 20){ //move left
-			deleteBox(tiger.yLoc,tiger.Loc);;
-			tiger.yLoc-=6;
-			tiger.xLoc=mapHeight-(Height[(tiger.yLoc-1)/6]+1)*3;
-			tiger.fuel--;
-		} else if(one > 200){ //move right
-			deleteBox(tiger.yLoc,tiger.Loc);;
-			tiger.yLoc+=6;
-			tiger.xLoc=mapHeight-(Height[(tiger.yLoc-1)/6]+1)*3;
-			tiger.fuel--;
-		}*/
 }
 void window(int y1, int x1, int y2, int x2){
 	clearScreenResCurser();
@@ -280,17 +274,35 @@ void setLed(int blue, int green, int red){
 	}
 }
 
-void ADCread1(){
+uint16_t readAntenna8(){
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_8, 1, ADC_SampleTime_1Cycles5);
 		ADC_StartConversion(ADC1); // Start ADC read
 		while (ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == 0); // Wait for ADC read
+		uint16_t x = ADC_GetConversionValue(ADC1);
+		return x;
 }
 
-void ADCread2(){
+uint16_t readAntenna9(){
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_9, 1, ADC_SampleTime_1Cycles5);
 		ADC_StartConversion(ADC1); // Start ADC read
 		while (ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == 0); // Wait for ADC read
+		uint16_t y = ADC_GetConversionValue(ADC1);
+		return y;
+}
 
+uint16_t readAntenna1(){
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_1Cycles5);
+	ADC_StartConversion(ADC1); // Start ADC read
+	while (ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == 0); // Wait for ADC read
+	uint16_t x = ADC_GetConversionValue(ADC1); // Read the ADC value
+	return x;
+}
+uint16_t readAntenna2(){
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_2, 1, ADC_SampleTime_1Cycles5);
+	ADC_StartConversion(ADC1); // Start ADC read
+	while (ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == 0); // Wait for ADC read
+	uint16_t y = ADC_GetConversionValue(ADC1); // Read the ADC value
+	return y;
 }
 
 uint8_t readJoystick(){

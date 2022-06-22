@@ -13,7 +13,7 @@
 #include "gameplay.h"
 #include "bossKey.h"
 
-void MoveWithJoystick(uint8_t variabel){
+/*void MoveWithJoystick(uint8_t variabel){
 
 
 	switch(variabel){
@@ -69,7 +69,7 @@ void MoveWithJoystick(uint8_t variabel){
 		}
 
 	}
-}
+}*/
 
 void moveMenu(uint8_t variabel,int width){
 	switch(variabel){

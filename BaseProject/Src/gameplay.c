@@ -26,11 +26,12 @@
 #include "meteor.h"
 #include "turn.h"
 #include "lcd.h"
+
 void runGame(){
 	game_t game;
 	tank_t tank1;
 	tank_t tank2;
-
+	lcd_init();
 
 
 	randConfig();
@@ -78,45 +79,34 @@ void runGame(){
 	tank(&tank1);
 	tank(&tank2);
 
+	/*shoot(Height,mapHeight, &tank1, &tank2,triple);
 	shoot(Height,mapHeight, &tank1, &tank2,triple);
 	shoot(Height,mapHeight, &tank1, &tank2,triple);
 	shoot(Height,mapHeight, &tank1, &tank2,triple);
 	shoot(Height,mapHeight, &tank1, &tank2,triple);
-	shoot(Height,mapHeight, &tank1, &tank2,triple);
-	shoot(Height,mapHeight, &tank1, &tank2,triple);
+	shoot(Height,mapHeight, &tank1, &tank2,triple);*/
 
 	while(win==0){
+
 		for(int i = 0; i < game.roundNum; i++){
 			randMeteor(Height,mapHeight,&tank1,&tank2);
 		}
-	setLed(0,1,1);
-	//lcdDisplay(&tank2);
-	turn(Height,mapHeight,&tank1,&tank2,triple,variabel);
+		//setLed(1,0,1);
+		setLed(0,1,0);
 
-	setLed(1,0,1);
-	//lcdDisplay(&tank2);
-	turn(Height,mapHeight,&tank2,&tank1,triple,variabel);
+		lcdDisplay(&tank1);
+		turn(Height,mapHeight,&tank1,&tank2,triple,variabel,win,1);
+		if(tank2.health<=0){win=1;
+		break;}
+		else if(tank1.health<=0){win=2;
+		break;}
+		setLed(0,1,1);
+		lcdDisplay(&tank2);
+		turn(Height,mapHeight,&tank2,&tank1,triple,variabel,win,2);
 
-	game.roundNum++;
-	if(tank2.health<=0){win=1;}
-	else if(tank1.health<=0){win=2;}
-
-	if(win == 1){
-		printf("Player 1 has won");
-	} else if(win == 2){
-		printf("Player 2 has won");
-	}
-
-
-
-
-
-
-
-
-
-
-
+		game.roundNum++;
+		if(tank2.health<=0){win=1;}
+		else if(tank1.health<=0){win=2;}
 	}
 }
 
@@ -131,6 +121,7 @@ void randPower(int type){
 }
 
 void randMeteor(int Height[],int baseHeight,tank_t * tiger,tank_t * sherman){
+	//if(getRand()*getRand() < )
 	int angle = getRand()*10+225;
 	int x = 0, y = getRand()*getRand()*getRand();
 	while(y == 0 || y > 210){
