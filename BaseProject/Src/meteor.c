@@ -26,7 +26,7 @@
 
 void meteorFall(int angle, int x, int y,int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman){
 	int check=0;
-	int t=1;
+	int t=4;
 	//int l;
 	int v=1;
 	int32_t xPos=0;

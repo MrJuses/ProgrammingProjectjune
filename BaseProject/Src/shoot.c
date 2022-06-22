@@ -131,6 +131,8 @@ int collision(int y, int x, int Height[], int baseHeight, tank_t * tiger, tank_t
 	}else if(baseHeight-((Height[(y-1)/6])*3)<=x){
 		destruction(y,x,Height, baseHeight);
 		return 1;
+	}else if(3>=x){
+		return 0;
 	}else{
 		smallBox(y,x,11);
 		for(l = 0; l < 70000; l++);

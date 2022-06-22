@@ -25,6 +25,10 @@
 #include "menu.h"
 #include "meteor.h"
 #include "lcd.h"
+#include "Endgame.h"
+#include "Vinkel.h"
+#include "Timer.h"
+#include "Movement.h"
 
 typedef struct{
 		int hours;
@@ -79,48 +83,54 @@ void turn(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerU
 		fgcolor(6);
 		moveToXY(3,175);
 		printf("Angle for player 2's shot: %d ", AnglePlayer2);
-		/*if(t==1){
+
+		if(t==1){
+			if((tiger->angle!=AnglePlayer1)||(sherman->angle!=AnglePlayer2)){
 		tiger->angle=AnglePlayer1;
 		sherman->angle=AnglePlayer2;
 		deleteBox(tiger->yLoc,tiger->xLoc);
 		deleteBox(sherman->yLoc,sherman->xLoc);
-		tank(&tiger);
-		tank(&sherman);
-		for(l=0;l<=1000;l++);
+		tank(&*tiger);
+		tank(&*sherman);
+		//for(l=0;l<=100;l++);
+		}
 		}else{
+			if((tiger->angle!=AnglePlayer2)||(sherman->angle!=AnglePlayer1)){
 			tiger->angle=AnglePlayer2;
 			sherman->angle=AnglePlayer1;
 			deleteBox(tiger->yLoc,tiger->xLoc);
 			deleteBox(sherman->yLoc,sherman->xLoc);
-			tank(&tiger);
-			tank(&sherman);
-			for(l=0;l<=1000;l++);
-		}*/
+			tank(&*tiger);
+			tank(&*sherman);
+			//for(l=0;l<=100;l++);
+		}}
 
 		if (variabel != readButton()){
 			variabel = readButton();
-			if(shootButton(variabel)==4){
+			if((shootButton(variabel)==4)&&(tiger->ammo1>0)){
 				fire=shoot(Height,baseHeight, &*tiger,&*sherman,powerUp);
-			} else if(shootButton(variabel)==2048){
+			} else if((shootButton(variabel)==2048)&&(tiger->ammo2>0)){
 				shoot(Height,baseHeight, &*tiger, &*sherman,powerUp);
 				shoot(Height,baseHeight, &*tiger, &*sherman,powerUp);
 				fire=shoot(Height,baseHeight, &*tiger, &*sherman,powerUp);
+				tiger->ammo2=tiger->ammo2-1;
 			}
 		} else if (variabel != readJoystick()){
 				variabel = readJoystick();
 				moveMenu(variabel,210);
-		}
-		/*if(Joystickposition < 20){ //move left
-			deleteBox(tiger.yLoc,tiger.xLoc);;
-			tiger.yLoc-=6;
-			tiger.xLoc=baseHeight-(Height[(tiger.yLoc-1)/6]+1)*3;
-			tiger.fuel--;
+		}else if(Joystickposition < 20){ //move left
+			deleteBox(tiger->yLoc,tiger->xLoc);
+			tiger->yLoc-=6;
+			tiger->xLoc=baseHeight-(Height[(tiger->yLoc-1)/6]+1)*3;
+			tiger->fuel--;
+			while(Joystickposition < 20){}
 		} else if(Joystickposition > 200){ //move right
-			deleteBox(tiger.yLoc,tiger.xLoc);;
-			tiger.yLoc+=6;
-			tiger.xLoc=baseHeight-(Height[(tiger.yLoc-1)/6]+1)*3;
-			tiger.fuel--;
-		}*/
+			deleteBox(tiger->yLoc,tiger->xLoc);
+			tiger->yLoc+=6;
+			tiger->xLoc=baseHeight-(Height[(tiger->yLoc-1)/6]+1)*3;
+			tiger->fuel--;
+			while(Joystickposition > 200){}
+		}
 	}
 }
 

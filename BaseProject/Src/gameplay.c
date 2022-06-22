@@ -91,6 +91,7 @@ void runGame(){
 		for(int i = 0; i < game.roundNum; i++){
 			randMeteor(Height,mapHeight,&tank1,&tank2);
 		}
+		randPower(1,&triple);
 		//setLed(1,0,1);
 		setLed(0,1,0);
 
@@ -110,12 +111,15 @@ void runGame(){
 	}
 }
 
-void randPower(int type){
+void randPower(int type, powerUp_t * triple){
 	if(getRand() > 7){
 		int x = getRand()*getRand(), y = getRand()*getRand()*getRand();
 		while(x > 28 || x == 0 || y == 0 || y > 210){
 			x = getRand()*getRand(),y = getRand()*getRand()*getRand();
 		}
+		deleteBox(triple->y,triple->x);
+		triple->x=x;
+		triple->y=y;
 		powerUp(y,x,type);
 	}
 }
