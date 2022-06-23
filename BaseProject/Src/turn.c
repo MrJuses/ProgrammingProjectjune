@@ -61,7 +61,6 @@ void TIM2_IRQHandler(void) {
 
 void turn(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerUp_t powerUp, uint16_t variabel,int win, int t){
 	int fire=0;
-	win = 1;
 	if (win==1){
 		EndGame(timer2.hours, timer2.minutes, timer2.seconds,*tiger,*sherman);
 		setLed(0,1,1);
