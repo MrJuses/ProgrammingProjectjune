@@ -1,9 +1,3 @@
-/*
- * shoot.c
- *
- *  Created on: 15. jun. 2022
- *      Author: Thomas
- */
 #include "stm32f30x_conf.h" // STM32 config
 #include "30010_io.h" 		// Input/output library for this course
 #include "stdio.h"
@@ -19,11 +13,10 @@
 #include "fixed.h"
 #include "shoot.h"
 #include "structs.h"
+#include "initialization.h"
 #define FIX8_SHIFT 8
 #define FIX8_MULT(a, b) ( ((a)*(b)) >> FIX8_SHIFT )
 #define FIX8_DIV(a, b) ( ((a) << FIX8_SHIFT) / b )
-/*int32_t FIX16_MULT(int32_t a, int32_t b){
-	return(((a)*(b))>>16);}*/
 
 uint16_t readButton(){
 	uint16_t white = GPIOD->IDR & (0x0001 << 2); //Read from pin PA1
@@ -41,7 +34,7 @@ uint16_t readButton(){
 	return bit;
 }
 
-int shootButton(uint16_t variabel){
+int shootButton(uint16_t variabel){//This function return a shoot value depending on which button was pressed
 	switch(variabel){
 		case 4: {
 
@@ -58,31 +51,30 @@ int shootButton(uint16_t variabel){
 }
 
 int shoot(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerUp_t powerUp){
+	//This function calculates the trajectory of the projectile fired from a tank
 	int check=0;
 	int t=1;
-	//int l;
 	int v=4;
 	int g=1;
 	int32_t xPos=0;
 	int32_t yPos=0;
-	int32_t fixX=convert(tiger->xLoc+1);
+	int32_t fixX=convert(tiger->xLoc+1); //The coordinates are converted to fixed point notation
 	int32_t fixY=convert(tiger->yLoc+2);
-	int32_t fixG=convert(g)>>4;
+	int32_t fixG=convert(g)>>4; //Gravity is converted to fixed point and bitshifted to the value we want
 	int32_t vX;
 	int32_t vY;
 	int32_t fixT;
 	int32_t fixT2;
 	int bulletX=tiger->xLoc+1;
 	int bulletY=tiger->yLoc+2;
-	vX=(FIX8_MULT(convert(v), fixRound(expand(SIN[tiger->angle]))));
+	vX=(FIX8_MULT(convert(v), fixRound(expand(SIN[tiger->angle]))));//The speed in both directions is defined by angle and speed
 	vY=FIX8_MULT(convert(v), fixRound(expand(COS(tiger->angle))));
 	while(check==0){
 		fixT=convert(t);
-		fixT2=FIX8_MULT(fixT, fixT);
-
+		fixT2=FIX8_MULT(fixT, fixT);//We multiply time by time to get time squared
 		xPos=fixX-FIX8_MULT(vX, fixT)+FIX8_MULT(fixG, fixT2);
 		yPos=fixY+FIX8_MULT(vY, fixT);
-		bulletX=fixRound(xPos);
+		bulletX=fixRound(xPos);//Calculated coordinates are converted back to regular ints for coordinates
 		bulletY=fixRound(yPos)-(fixRound(yPos)+1)%2;
 		check=collision(bulletY, bulletX, Height, baseHeight, &*tiger, &*sherman, powerUp);
 		t++;
@@ -92,7 +84,7 @@ int shoot(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerU
 	return 1;
 }
 int collision(int y, int x, int Height[], int baseHeight, tank_t * tiger, tank_t * sherman, powerUp_t powerUp){
-
+	//This function checks if the projectile collides with an object each time time steps
 	int l;
 	if((y<=0)||(y>=210)){
 		return 1;
@@ -103,6 +95,7 @@ int collision(int y, int x, int Height[], int baseHeight, tank_t * tiger, tank_t
 		powerUp.y=1;
 		return 1;
 	}if((x>=tiger->xLoc)&&(y>=tiger->yLoc)&&(y<(tiger->yLoc+6))){
+		//If a tank is hit or the ground beneath the tank is hit the tank will respawn and lose a life
 		deleteBox(tiger->yLoc,tiger->xLoc);
 		for(l = 0; l < 70000; l++);
 		if(x>=tiger->xLoc+3){
@@ -144,6 +137,7 @@ int collision(int y, int x, int Height[], int baseHeight, tank_t * tiger, tank_t
 
 }
 void destruction(int y, int x, int Height[], int baseHeight){
+	//This function deletes a part of the map if its hit
 	int delX=(baseHeight-((Height[(y-1)/6])*3));
 	int delY=y-y%6+1;
 	deleteBox(delY,delX);

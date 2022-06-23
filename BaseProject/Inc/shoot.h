@@ -1,10 +1,3 @@
-/*
- * shoot.h
- *
- *  Created on: 15. jun. 2022
- *      Author: Tnopn
- */
-
 #ifndef SHOOT_H_
 #define SHOOT_H_
 //#define FIX16_SHIFT 16

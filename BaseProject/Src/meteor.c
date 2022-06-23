@@ -16,18 +16,19 @@
 #include "gameplay.h"
 #include "meteor.h"
 #include "turn.h"
+#include "initialization.h"
 #define FIX8_SHIFT 8
 #define FIX8_MULT(a, b) ( ((a)*(b)) >> FIX8_SHIFT )
 #define FIX8_DIV(a, b) ( ((a) << FIX8_SHIFT) / b )
-/*int32_t FIX16_MULT(int32_t a, int32_t b){
-	return(((a)*(b))>>16);}*/
+
 
 
 
 void meteorFall(int angle, int x, int y,int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman){
+	//This is the function that calculates the trajectory of a meteor
+	//It uses many of the same principles as shoot but the math is simpler
 	int check=0;
 	int t=4;
-	//int l;
 	int v=1;
 	int32_t xPos=0;
 	int32_t yPos=0;
@@ -46,8 +47,6 @@ void meteorFall(int angle, int x, int y,int Height[] ,int baseHeight, tank_t * t
 		yPos=fixY+FIX8_MULT(vY, fixT);
 		bulletX=fixRound(xPos);
 		bulletY=fixRound(yPos)-(fixRound(yPos)+1)%2;
-		//smallBox(bulletY,bulletX,11);
-		//for(l = 0; l < 70000; l++);
 		check=meteorCollision(bulletY, bulletX, Height, baseHeight, &*tiger, &*sherman);
 		t++;
 
@@ -55,7 +54,7 @@ void meteorFall(int angle, int x, int y,int Height[] ,int baseHeight, tank_t * t
 
 }
 int meteorCollision(int y, int x, int Height[], int baseHeight, tank_t * tiger, tank_t * sherman){
-
+	//This is basically the same function as collision from shoot with minor alterations
 	int l;
 	if((y<=0)||(y>=210)){
 		return 1;
@@ -88,7 +87,7 @@ int meteorCollision(int y, int x, int Height[], int baseHeight, tank_t * tiger, 
 		sherman->health=sherman->health-1;
 		return 1;
 	}else if(baseHeight-((Height[(y-1)/6])*3)<=x){
-		meteorDestruction(y,x,Height, baseHeight);
+		destruction(y,x,Height, baseHeight);
 		return 1;
 	}else{
 		smallBox(y,x,13);
@@ -98,10 +97,4 @@ int meteorCollision(int y, int x, int Height[], int baseHeight, tank_t * tiger, 
 	}
 
 }
-void meteorDestruction(int y, int x, int Height[], int baseHeight){
-	int delX=(baseHeight-((Height[(y-1)/6])*3));
-	int delY=y-y%6+1;
-	deleteBox(delY,delX);
-	Height[(y-1)/6]-=1;
 
-}

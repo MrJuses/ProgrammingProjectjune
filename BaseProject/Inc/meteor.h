@@ -1,10 +1,3 @@
-/*
- * meteor.h
- *
- *  Created on: 21. jun. 2022
- *      Author: emilm
- */
-
 #ifndef METEOR_H_
 #define METEOR_H_
 

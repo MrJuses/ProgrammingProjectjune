@@ -64,9 +64,10 @@ const signed short SIN[360]=
 	0xEE5C,0xEF70,0xF084,0xF19A,0xF2B2,0xF3CA,0xF4E3,0xF5FD,
 	0xF718,0xF833,0xF94F,0xFA6C,0xFB89,0xFCA7,0xFDC4,0xFEE2,
 };
-signed short COS(int angle){
+signed short COS(int angle){//This is a function that calculates cosine based on the sine LUT
 	signed short x=0;
 	if((0<=angle)&&(angle<269)){x=SIN[angle+90];}
 	else if((270<=angle)&&(angle<360)){x=SIN[angle-270];}
 	return x;
 }
+

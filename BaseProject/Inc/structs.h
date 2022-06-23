@@ -1,10 +1,3 @@
-/*
- * structs.h
- *
- *  Created on: 20. jun. 2022
- *      Author: Tnopn
- */
-
 #ifndef STRUCTS_H_
 #define STRUCTS_H_
 typedef struct{
@@ -25,5 +18,5 @@ typedef struct{
 typedef struct{
 	int roundNum;
 }game_t;
-
+//This header constructs 3 structs used for the game
 #endif /* STRUCTS_H_ */

@@ -1,10 +1,3 @@
-/*
- * visuals.h
- *
- *  Created on: 13. jun. 2022
- *      Author: emilm
- */
-
 #ifndef VISUALS_H_
 #define VISUALS_H_
 #include "structs.h"

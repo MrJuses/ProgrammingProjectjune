@@ -25,7 +25,7 @@
 */
 
 
-void drawTerrain(int yPos,int xPos,int arr[]){
+void drawTerrain(int yPos,int xPos,int arr[]){//Here the terrain is drawn by drawing a 6*3 box for 4*3 beneath the base Height of the map up to a given Height determined by our Height array
 	int i;
 	for(i = 0; i < yPos; i++){
 		int j;
@@ -35,7 +35,7 @@ void drawTerrain(int yPos,int xPos,int arr[]){
 	}
 }
 
-void drawBox(int yPos,int xPos,int color){
+void drawBox(int yPos,int xPos,int color){//This function draws a 6*3 box on the given coordinates with a given color
 	int i,j;
 	fgcolor(color);
 	for( i = xPos; i < xPos + 3; i++){
@@ -45,7 +45,7 @@ void drawBox(int yPos,int xPos,int color){
 		}
 	}
 }
-void deleteBox(int yPos, int xPos){
+void deleteBox(int yPos, int xPos){//This function deletes a 6*3 box by printing space
 	int i,j;
 	for( i = xPos; i < xPos + 3; i++){
 		for( j = yPos; j < yPos + 6; j++){
@@ -54,7 +54,7 @@ void deleteBox(int yPos, int xPos){
 		}
 	}
 }
-void smallBox(int yPos, int xPos, int color){
+void smallBox(int yPos, int xPos, int color){//This funtion draws a 1*2 box on the given coordinates with a given color
 	int i;
 	fgcolor(color);
 	for( i = yPos; i < yPos + 2; i++){
@@ -62,17 +62,18 @@ void smallBox(int yPos, int xPos, int color){
 		printf("%c",219);
 	}
 }
-void deleteSmallBox(int yPos, int xPos){
+void deleteSmallBox(int yPos, int xPos){//This function deletes a 1*2 box by printing space
 	int i;
 	for( i = yPos; i < yPos + 2; i++){
 		moveToXY(xPos,i);
 		printf(" ");
 	}
 }
-void tank(tank_t * tiger){
+void tank(tank_t * tiger){//This function takes a tank as an input and draws it
 	int i=tiger->xLoc;//(xSize-((arr[(yPos)]+1)*3));
 	int j=tiger->yLoc;//(6*yPos)+1;
 	int k=tiger->color;
+	//It checks the angle and draws the cannon
 	if(tiger->angle >= 0 && tiger->angle <=180){
 		if(tiger->angle > 154){
 			smallBox(j,i+2,k);
@@ -112,7 +113,7 @@ void tank(tank_t * tiger){
 	}
 }
 
-void powerUp(int y, int x, int type){
+void powerUp(int y, int x, int type){//This function draws a Power Up on the given coordinates
 	moveToXY(x,y);
 	fgcolor(11);
 	for(int i = x; i < x + 3; i++){
