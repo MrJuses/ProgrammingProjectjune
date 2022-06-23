@@ -19,6 +19,21 @@ void moveMenu(uint8_t variabel,int width){
 			runGame();
 			break;
 		}case 2: { // DOWN
+			clearScreenResCurser();
+			fgcolor(2);
+			for(int i = 0 ; i < 5 ; i++){
+				moveToXY(2,2);
+				printf("EXITING GAME");
+				for(int q = 0 ; q < 10 ; q++){
+					printf(".");
+					for(int y = 0 ; y < 200000 ; y++);
+				}
+				moveToXY(2,2);
+				printf("EXITING GAME          ");
+
+			}
+			clearScreenResCurser();
+			exit(0);
 			break;
 		}case 4:{ // LEFT
 			menu(width);

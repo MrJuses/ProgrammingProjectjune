@@ -8,7 +8,6 @@
 #include "30010_io.h" 		// Input/output library for this course
 #include "stdio.h"
 #include "stdint.h"
-#include "caller.h"
 #include "ansi.h"
 #include <time.h>
 #include <stdlib.h>
@@ -22,10 +21,11 @@ int32_t expand(int32_t i) {
 // Converts an 18.14 fixed point number to 16.16
 return i << 2;
 }
-int32_t fixRound(int32_t i){
+
+int32_t fixRound(int32_t i){//fixround takes a 24.8 fixed point number and converts it to int
 	return i>>8;
 }
-int32_t convert(int i){
+int32_t convert(int i){//convert takes an int and converts it to a 24.8
 	return i<<8;
 }
 void printFix(int32_t i) {

@@ -3,6 +3,7 @@
 #include "stdio.h"
 #include "stdint.h"
 
+//set color to draw
 void fgcolor(uint8_t foreground) {
 /*  Value      foreground     Value     foreground
     ------------------------------------------------
@@ -23,14 +24,9 @@ void fgcolor(uint8_t foreground) {
   printf("%c[%d;%dm", ESC, type, foreground+30);
 }
 
+//set color of background
 void bgcolor(uint8_t background) {
-/* IMPORTANT:   When you first use this function you cannot get back to true white background in HyperTerminal.
-   Why is that? Because ANSI does not support true white background (ANSI white is gray to most human eyes).
-                The designers of HyperTerminal, however, preferred black text on white background, which is why
-                the colors are initially like that, but when the background color is first changed there is no
- 	              way comming back.
-   Hint:        Use resetbgcolor(); clrscr(); to force HyperTerminal into gray text on black background.
-
+/*
     Value      Color
     ------------------
       0        Black
@@ -61,27 +57,35 @@ void resetbgcolor() {
 }
 
 //Cursor Controls
+//move to location on screen
 void moveToXY(int x, int y){
 	printf("%c[%d;%dH",ESC,x,y);
 }
+//move up an amount
 void moveUp(int i){
 	printf("%c[%dA",ESC,i);
 }
+//move down an amount
 void moveDown(int i){
 	printf("%c[%dB",ESC,i);
 }
+//move forward an amount
 void moveForward(int i){
 	printf("%c[%dC",ESC,i);
 }
+//move back an amount
 void moveBack(int i){
 	printf("%c[%dD",ESC,i);
 }
+//remember position
 void savePos(){
 	printf("%c[s",ESC);
 }
+//go to stored location
 void recallPos(){
 	printf("%c[u",ESC);
 }
+//reset position
 void resPos(){
 	printf("%c[H",ESC);
 }

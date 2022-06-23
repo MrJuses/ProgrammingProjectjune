@@ -1,14 +1,7 @@
-/*
- * gameplay.c
- *
- *  Created on: 17. jun. 2022
- *      Author: Thomas
- */
 #include "stm32f30x_conf.h" // STM32 config
 #include "30010_io.h" 		// Input/output library for this course
 #include "stdio.h"
 #include "stdint.h"
-#include "caller.h"
 #include "ansi.h"
 #include <time.h>
 #include <stdlib.h>
@@ -30,14 +23,18 @@
 #include "vinkel.h"
 
 void runGame(){
+	//creating structs
 	game_t game;
 	tank_t tank1;
 	tank_t tank2;
+	powerUp_t triple;
+
+	//init elements
 	lcd_init();
-
-
 	randConfig();
 	uint16_t variabel=0;
+
+	//creates height-map
 	int Height[36];
 	for(int i = 0 ; i < 36 ; i++){
 		if(i == 0){
@@ -51,17 +48,21 @@ void runGame(){
 			Height[i] = x;
 		}
 	}
+
+	//sets screensize
 	int mapHeight=49;
 	int mapWidth=35;
-	int win=0;
-	powerUp_t triple;
 
+	//win condition
+	int win=0;
+
+	//values for structs created
 	tank1.health=10;
 	tank1.angle=30;
 	tank1.fuel=10;
 	tank1.ammo1=99;
 	tank1.ammo2=0;
-	tank1.yLoc=31;
+	tank1.yLoc=19;
 	tank1.color=2;
 	tank1.xLoc=mapHeight-(Height[(tank1.yLoc-1)/6]+1)*3;
 	tank2.health=10;
@@ -69,21 +70,21 @@ void runGame(){
 	tank2.fuel=10;
 	tank2.ammo1=99;
 	tank2.ammo2=0;
-	tank2.yLoc=151;
+	tank2.yLoc=187;
 	tank2.xLoc=mapHeight-(Height[(tank2.yLoc-1)/6]+1)*3;
 	tank2.color=4;
-
 	triple.x=1;
 	triple.y=1;
 	game.roundNum=1;
+
+
 	clearScreenResCurser();
 	drawTerrain(mapWidth,mapHeight,Height);
 	tank(&tank1);
 	tank(&tank2);
 
-
 	while(1){
-
+		setLed(1,0,1);
 		for(int i = 0; i < game.roundNum; i++){
 			randMeteor(Height,mapHeight,&tank1,&tank2);
 		}

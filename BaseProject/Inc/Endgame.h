@@ -9,7 +9,7 @@
 
 #include "structs.h"
 
-int scoreCalculator();
+int scoreCalculator(int hours, int minutes, int seconds,tank_t * winner);
 void printEndGameScreen();
 void EndGame(int hours, int minutes, int seconds, tank_t player1, tank_t player2);
 

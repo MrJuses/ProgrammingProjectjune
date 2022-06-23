@@ -2,7 +2,6 @@
 #include "30010_io.h" 		// Input/output library for this course
 #include "stdio.h"
 #include "stdint.h"
-#include "caller.h"
 #include "ansi.h"
 #include <time.h>
 #include <stdlib.h>

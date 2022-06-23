@@ -2,7 +2,6 @@
 #include "30010_io.h" 		// Input/output library for this course
 #include "stdio.h"
 #include "stdint.h"
-#include "caller.h"
 #include "ansi.h"
 #include <time.h>
 #include <stdlib.h>
@@ -36,17 +35,17 @@ void menu(int width){
 	fgcolor(15);
 	moveToXY(xPos+15,width/2-3);
 	printf("Start");
-	moveToXY(xPos+17,width/2-6);
-	printf("Difficulty");
-	moveToXY(xPos+19,width/2-3);
+	moveToXY(xPos+17,width/2-3);
 	printf("Help");
+	moveToXY(xPos+19,width/2-3);
+	printf("Exit");
 
-	moveToXY(xPos+45,width/2-12);
-	printf("(Joystick Up -> Start)");
-	moveToXY(xPos+46,width/2-16);
-	printf("(Joystick Center -> bossKey)");
-	moveToXY(xPos+47,width/2-12);
+	moveToXY(xPos+45,width/2-13);
+	printf("(Joystick  Up -> Start)");
+	moveToXY(xPos+46,width/2-13);
 	printf("(Joystick Right -> Help)");
+	moveToXY(xPos+47,width/2-13);
+	printf("(Joystick Down -> Exit)");
 	while(1){
 		if (variabel != readJoystick()){
 			variabel = readJoystick();
@@ -72,6 +71,38 @@ void helpMenu(int width){
 	fgcolor(15);
 	moveToXY(xPos+15,width/2-3);
 	printf("Back");
+
+	moveToXY(xPos+22,width/2-65);
+	printf("Space-Tanks is a two-player competitive turn based game, on the moon, where you must find the correct angle to shoot each other,");
+	moveToXY(xPos+23,width/2-65);
+	printf("     whilst avoiding the meteors raining from above. power-ups can be aquired in game by shooting them when they appear.\n ");
+	moveToXY(xPos+24,width/2-65);
+	printf("     Scoring is highly dependend on time, when one of the players die the end screen will show the stats of the winner\n");
+	moveToXY(xPos+25,width/2-65);
+	printf("              A few Easter-Eggs have been implemented in the game E.g: A special level. - Can you find it?!");
+	moveToXY(xPos+26,width/2-65);
+	printf("        For additional help visit our User manual, here all the functions and descriptions can be read in full detail!");
+
+	moveToXY(xPos+33,width/2-20);
+	printf("(Potentiometer 1 -> Green Tank Angle)");
+
+	moveToXY(xPos+34,width/2-20);
+	printf("(Potentiometer 2 -> Blue  Tank Angle)");
+
+	moveToXY(xPos+35,width/2-22);
+	printf("(2-axis Joystick Left  -> Move Tank Left)");
+
+	moveToXY(xPos+36,width/2-22);
+	printf("(2-axis Joystick Right -> Move Tank Right)");
+
+	moveToXY(xPos+37,width/2-16);
+	printf("(Red  Button  -> Normal shot)");
+
+	moveToXY(xPos+38,width/2-16);
+	printf("(White Button -> Special Shot)");
+
+	moveToXY(xPos+39,width/2-15);
+	printf("(Joystick Center -> BossKey)");
 
 
 

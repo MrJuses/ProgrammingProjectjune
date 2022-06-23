@@ -8,7 +8,6 @@
 #include "30010_io.h" 		// Input/output library for this course
 #include "stdio.h"
 #include "stdint.h"
-#include "caller.h"
 #include "ansi.h"
 #include <time.h>
 #include <stdlib.h>
@@ -94,9 +93,8 @@ void turn(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerU
 		deleteBox(sherman->yLoc,sherman->xLoc);
 		tank(&*tiger);
 		tank(&*sherman);
-		//for(l=0;l<=100;l++);
 		}
-		}else{
+		}else if(t==2){
 			if((tiger->angle!=AnglePlayer2)||(sherman->angle!=AnglePlayer1)){
 			tiger->angle=AnglePlayer2;
 			sherman->angle=AnglePlayer1;
@@ -104,7 +102,6 @@ void turn(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerU
 			deleteBox(sherman->yLoc,sherman->xLoc);
 			tank(&*tiger);
 			tank(&*sherman);
-			//for(l=0;l<=100;l++);
 		}}
 
 		if (variabel != readButton()){

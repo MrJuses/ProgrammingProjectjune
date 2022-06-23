@@ -179,36 +179,6 @@ void init2(){
 
 }
 
-void joystickLed(){
-		uint16_t up = GPIOA->IDR & (0x0001 << 4); //Read from pin PA4
-		uint16_t center = GPIOB->IDR & (0x0001 << 5); //Read from pin PB5
-		uint16_t down = GPIOB->IDR & (0x0001 << 0); //Read from pin PB0
-		uint16_t left = GPIOC->IDR & (0x0001 << 1); //Read from pin PC1
-		uint16_t right = GPIOC->IDR & (0x0001 << 0); //Read from pin PC0
-
-
-
-		if (up){
-			GPIOA->ODR |= (0x0001 << 9); // Blue PRINT YELLOW
-		}
-		if (down){
-			GPIOB->ODR |= (0x0001 << 4); // Red PRINT CYAN
-
-		}
-		if (left){
-			GPIOA->ODR |= (0x0001 << 9); // Blue PRINT GREEN
-			GPIOB->ODR |= (0x0001 << 4); // Red
-
-		}
-		if (right){
-			GPIOC->ODR |= (0x0001 << 7); // Green PRINT BLUE
-			GPIOB->ODR |= (0x0001 << 4); // Red
-
-		}
-		if (center){
-			GPIOC->ODR |= (0x0001 << 7); // Green PRINT MAGENTA
-		}
-}
 void window(int y1, int x1, int y2, int x2){
 	clearScreenResCurser();
 	int x, y;
@@ -245,32 +215,30 @@ void window(int y1, int x1, int y2, int x2){
 
 void setLed(int blue, int green, int red){
 	if (blue == 1){
-		GPIOA->ODR |= (0x0001 << 9); // Blue
-		/*if (green == 1){
+		GPIOA->ODR &= ~(0x0001 << 9); // Blue
+		GPIOB->ODR |= (0x0001 << 4); // Red
+		GPIOC->ODR |= (0x0001 << 7); // Green
+		if (green == 1){
 			if (red == 1){ // NO LED
-				GPIOC->ODR |= (0x0001 << 7); // Green
-				GPIOA->ODR |= (0x0001 << 9); // Blue
-				GPIOB->ODR |= (0x0001 << 4); // Red
+				GPIOC->ODR &= ~(0x0001 << 7); // Green
+				GPIOB->ODR &= ~(0x0001 << 4); // Red
 			}else { // RED
-				GPIOC->ODR |= (0x0001 << 7); // Green
-				GPIOA->ODR |= (0x0001 << 9); // Blue
+				GPIOC->ODR &= ~(0x0001 << 7); // Green
 			}
 		}else if (red == 1) { // GREEN
-			GPIOA->ODR |= (0x0001 << 9); // Blue
-			GPIOB->ODR |= (0x0001 << 4); // Red
-		}else { // YELLOW
-			GPIOA->ODR |= (0x0001 << 9); // Blue
-		}*/
+			GPIOB->ODR &= ~(0x0001 << 4); // Red
+		}
 	}else if (green == 1){
-		GPIOC->ODR |= (0x0001 << 7); // Green
-		/*if (red == 1){ // BLUE
-			GPIOC->ODR |= (0x0001 << 7); // Green
-			GPIOB->ODR |= (0x0001 << 4); // Red
-		}else { // CYAN
-			GPIOC->ODR |= (0x0001 << 7); // Green
-		}*/
-	}else if (red == 1){ // CYAN
+		GPIOC->ODR &= ~(0x0001 << 7); // Green
+		GPIOA->ODR |= (0x0001 << 9); // Blue
 		GPIOB->ODR |= (0x0001 << 4); // Red
+		if (red == 1){ // BLUE
+			GPIOB->ODR &= ~(0x0001 << 4); // Red
+		}
+	}else if (red == 1){ // CYAN
+		GPIOB->ODR &= ~(0x0001 << 4); // Red
+		GPIOA->ODR |= (0x0001 << 9); // Blue
+		GPIOC->ODR |= (0x0001 << 7); // Green
 	}else {
 		// White
 	}

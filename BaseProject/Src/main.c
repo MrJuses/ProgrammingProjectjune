@@ -2,7 +2,6 @@
 #include "30010_io.h" 		// Input/output library for this course
 #include "stdio.h"
 #include "stdint.h"
-#include "caller.h"
 #include "ansi.h"
 #include <time.h>
 #include <stdlib.h>
@@ -22,8 +21,11 @@ int main(void){
 	clearScreenResCurser();
 	init();
 	init2();
+	GPIOC->ODR |= (0x0001 << 7); // Green
+	GPIOA->ODR |= (0x0001 << 9); // Blue
+	GPIOB->ODR |= (0x0001 << 4); // Red
 	randConfig();
-	setLed(0,1,0);
+	setLed(1,1,1);
 	uint8_t variabel;
 	variabel = readJoystick();
 

@@ -2,7 +2,6 @@
 #include "30010_io.h" 		// Input/output library for this course
 #include "stdio.h"
 #include "stdint.h"
-#include "caller.h"
 #include "ansi.h"
 #include <time.h>
 #include <stdlib.h>
@@ -89,6 +88,7 @@ int collision(int y, int x, int Height[], int baseHeight, tank_t * tiger, tank_t
 	if((y<=0)||(y>=210)){
 		return 1;
 	}else if((x<powerUp.x+3)&&(x>=powerUp.x)&&(y>=powerUp.y)&&(y<(powerUp.y+6))){
+		setLed(0,1,1);
 		deleteBox(powerUp.y,powerUp.x);
 		tiger->ammo2=tiger->ammo2+1;
 		powerUp.x=1;

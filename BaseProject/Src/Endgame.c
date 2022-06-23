@@ -1,23 +1,7 @@
-/*
- * Endgame.c
- *
- *  Created on: 22. jun. 2022
- *      Author: emilm
- */
-
-
-/*
- * Endgame.c
- *
- *  Created on: Jun 21, 2022
- *      Author: Mars
- */
-
 #include "stm32f30x_conf.h" // STM32 config
 #include "30010_io.h" 		// Input/output library for this course
 #include "stdio.h"
 #include "stdint.h"
-#include "caller.h"
 #include "ansi.h"
 #include <time.h>
 #include <stdlib.h>
@@ -40,10 +24,11 @@
 #include "timer.h"
 #include "structs.h"
 
-int scoreCalculator(int hours, int minutes, int seconds){
+//calculates the winners score
+int scoreCalculator(int hours, int minutes, int seconds,tank_t * winner){
 
-	int Score = hours*10800 + minutes*180 + seconds*3;
-	int Endscore = 10000 - Score;
+	int timeScore = hours*10000 + minutes*500 + seconds*50;
+	int Endscore =  1000000+winner->ammo1*10+winner->ammo2*1000+winner->health*500-timeScore;
 
 	return Endscore;
 }
@@ -56,57 +41,61 @@ void printEndGameScreen(){
 	moveToXY(25,47);
 	printf("Down below you will find your final score, along with the amount of time the game lasted for");
 	moveToXY(30,47);
-	printf("To play again simply click the reset button on the Microcontroller");
+	printf("To play again simply click the reset button on the Micro-controller");
 
 }
 
 void EndGame(int hours, int minutes, int seconds, tank_t player1, tank_t player2){
+	int winner=0;
 	clearScreenResCurser();
 	stopTimer();
+	if(player1.health > player2.health){
+		winner = 1;
+	} else if(player1.health < player2.health){
+		winner = 2;
+	}
 	printEndGameScreen();
-	int Finalscore = scoreCalculator(hours, minutes, seconds);
-	int winner=0;
+
+	int Finalscore;
+	if(winner == 1){
+		Finalscore = scoreCalculator(hours, minutes, seconds,&player1);
+	} else if(winner == 2){
+		Finalscore = scoreCalculator(hours, minutes, seconds,&player2);
+	}
 	moveToXY(35,47);
 	fgcolor(6);
 	printf("The game lasted for : %d hours, %d minutes and  %d seconds", hours, minutes, seconds);
-	fgcolor(1);
-	moveToXY(47,47);
-	if(player1.health > player2.health){
-		winner = 1;
-		printf("Green Player has won");
-	} else if(player1.health < player2.health){
-		winner = 2;
-		printf("Blue Player has won");
-	}
 
-	fgcolor(1);
-	moveToXY(45,47);
+	fgcolor(15);
 	if(winner==1){
-	printf("Final Health: %d", player1.health);
+		moveToXY(40,47);
+		printf("Green Player has won");
 
-	fgcolor(1);
-	moveToXY(50,47);
-	printf("You moved this many blocks: %d", 10-player1.fuel);
+		moveToXY(45,47);
+		printf("Final Health: %d", player1.health);
 
-	fgcolor(1);
-	moveToXY(55,47);
-	printf("You used this much ammo: %d", 99-player1.ammo1);
+		moveToXY(50,47);
+		printf("You moved this many blocks: %d", 10-player1.fuel);
 
-	fgcolor(1);
-	moveToXY(60,47);
-	printf("Your final score is: %d", Finalscore);
-	}else if(winner==2){
+		moveToXY(55,47);
+		printf("You used this much ammo: %d", 99-player1.ammo1);
+
+		moveToXY(60,47);
+		printf("Your final score is: %d", Finalscore);
+
+	} else if(winner==2){
+		moveToXY(40,47);
+		printf("Blue Player has won");
+
+		moveToXY(45,47);
 		printf("Final Health: %d", player2.health);
 
-		fgcolor(1);
 		moveToXY(50,47);
 		printf("You moved this many blocks: %d", 10-player2.fuel);
 
-		fgcolor(1);
 		moveToXY(55,47);
 		printf("You used this much ammo: %d", 99-player2.ammo1);
 
-		fgcolor(1);
 		moveToXY(60,47);
 		printf("Your final score is: %d", Finalscore);
 		}
