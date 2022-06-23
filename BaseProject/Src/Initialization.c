@@ -245,7 +245,8 @@ void window(int y1, int x1, int y2, int x2){
 
 void setLed(int blue, int green, int red){
 	if (blue == 1){
-		if (green == 1){
+		GPIOA->ODR |= (0x0001 << 9); // Blue
+		/*if (green == 1){
 			if (red == 1){ // NO LED
 				GPIOC->ODR |= (0x0001 << 7); // Green
 				GPIOA->ODR |= (0x0001 << 9); // Blue
@@ -259,14 +260,15 @@ void setLed(int blue, int green, int red){
 			GPIOB->ODR |= (0x0001 << 4); // Red
 		}else { // YELLOW
 			GPIOA->ODR |= (0x0001 << 9); // Blue
-		}
+		}*/
 	}else if (green == 1){
-		if (red == 1){ // BLUE
+		GPIOC->ODR |= (0x0001 << 7); // Green
+		/*if (red == 1){ // BLUE
 			GPIOC->ODR |= (0x0001 << 7); // Green
 			GPIOB->ODR |= (0x0001 << 4); // Red
 		}else { // CYAN
 			GPIOC->ODR |= (0x0001 << 7); // Green
-		}
+		}*/
 	}else if (red == 1){ // CYAN
 		GPIOB->ODR |= (0x0001 << 4); // Red
 	}else {

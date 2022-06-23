@@ -113,6 +113,7 @@ int collision(int y, int x, int Height[], int baseHeight, tank_t * tiger, tank_t
 			tiger->xLoc=baseHeight-(Height[(tiger->yLoc-1)/6]+1)*3;
 		}
 		tank(&*tiger);
+		setLed(0,0,1);
 		tiger->health=tiger->health-1;
 		return 1;
 	}else if((x>=sherman->xLoc)&&(y>=sherman->yLoc)&&(y<(sherman->yLoc+6))){
@@ -126,6 +127,7 @@ int collision(int y, int x, int Height[], int baseHeight, tank_t * tiger, tank_t
 			}
 		for(l = 0; l < 70000; l++);
 		tank(&*sherman);
+		setLed(0,0,1);
 		sherman->health=sherman->health-1;
 		return 1;
 	}else if(baseHeight-((Height[(y-1)/6])*3)<=x){

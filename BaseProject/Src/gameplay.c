@@ -26,6 +26,8 @@
 #include "meteor.h"
 #include "turn.h"
 #include "lcd.h"
+#include "Endgame.h"
+#include "vinkel.h"
 
 void runGame(){
 	game_t game;
@@ -79,31 +81,23 @@ void runGame(){
 	tank(&tank1);
 	tank(&tank2);
 
-	/*shoot(Height,mapHeight, &tank1, &tank2,triple);
-	shoot(Height,mapHeight, &tank1, &tank2,triple);
-	shoot(Height,mapHeight, &tank1, &tank2,triple);
-	shoot(Height,mapHeight, &tank1, &tank2,triple);
-	shoot(Height,mapHeight, &tank1, &tank2,triple);
-	shoot(Height,mapHeight, &tank1, &tank2,triple);*/
 
-	while(win==0){
+	while(1){
 
 		for(int i = 0; i < game.roundNum; i++){
 			randMeteor(Height,mapHeight,&tank1,&tank2);
 		}
 		randPower(1,&triple);
-		//setLed(1,0,1);
 		setLed(0,1,0);
-
 		lcdDisplay(&tank1);
 		turn(Height,mapHeight,&tank1,&tank2,triple,variabel,win,1);
-		if(tank2.health<=0){win=1;
-		break;}
-		else if(tank1.health<=0){win=2;
-		break;}
-		setLed(0,1,1);
+		if(tank2.health<=0){win=1;}
+		else if(tank1.health<=0){win=2;}
+		setLed(1,0,0);
 		lcdDisplay(&tank2);
 		turn(Height,mapHeight,&tank2,&tank1,triple,variabel,win,2);
+		tank1.fuel++;
+		tank2.fuel++;
 
 		game.roundNum++;
 		if(tank2.health<=0){win=1;}

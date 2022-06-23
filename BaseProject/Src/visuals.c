@@ -145,31 +145,5 @@ void powerUp(int y, int x, int type){
 	}
 }
 
-/*void drawMeteor(int y,int x,int angle){
-
-	if(angle < 3){
-		smallBox(y+2,x,8);
-		smallBox(y,x+1,8);
-		smallBox(y+2,x+1,1);
-		smallBox(y+4,x+1,1);
-		smallBox(y+2,x+2,9);
-		smallBox(y+4,x+2,9);
-	} else if(angle > 6){
-		smallBox(y+2,x,8);
-		smallBox(y+4,x+1,8);
-		smallBox(y,x+1,1);
-		smallBox(y+2,x+1,1);
-		smallBox(y,x+2,9);
-		smallBox(y+2,x+2,9);
-	} else{
-		smallBox(y+2,x,8);
-		smallBox(y,x+1,1);
-		smallBox(y+4,x+1,1);
-		smallBox(y+2,x+2,1);
-		smallBox(y+2,x+1,9);
-	}
-
-}*/
-
 
 

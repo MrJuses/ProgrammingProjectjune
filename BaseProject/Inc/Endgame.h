@@ -7,10 +7,11 @@
 #ifndef ENDGAME_H_
 #define ENDGAME_H_
 
+#include "structs.h"
 
 int scoreCalculator();
 void printEndGameScreen();
-void EndGame(int hours, int minutes, int seconds);
+void EndGame(int hours, int minutes, int seconds, tank_t player1, tank_t player2);
 
 #endif /* TIMER_H_ */
 

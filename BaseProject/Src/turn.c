@@ -19,7 +19,6 @@
 #include "fixed.h"
 #include "shoot.h"
 #include "gameplay.h"
-#include "random.h"
 #include "structs.h"
 #include "initialization.h"
 #include "menu.h"
@@ -62,17 +61,21 @@ void TIM2_IRQHandler(void) {
 
 void turn(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerUp_t powerUp, uint16_t variabel,int win, int t){
 	int fire=0;
-	int l=0;
-	while(fire==0 || win !=0){
-		if (win==1 || win==2){
-			EndGame(timer2.hours, timer2.minutes, timer2.seconds);
-			timer2.minutes = 0;
-			setLed(0,1,1);
-		}
+	win = 1;
+	if (win==1){
+		EndGame(timer2.hours, timer2.minutes, timer2.seconds,*tiger,*sherman);
+		setLed(0,1,1);
+	} else if (win==2){
+		EndGame(timer2.hours, timer2.minutes, timer2.seconds,*sherman,*tiger);
+		setLed(0,1,1);
+	}
+	while(fire==0){
 		moveToXY(0,0);
 		TimerWindow();
 		moveToXY(0,0);
 		printf("GAMETIME : %d:%d:%d ",timer2.hours, timer2.minutes, timer2.seconds);
+		readAntenna8();
+		uint16_t Joystickposition = ADC_GetConversionValue(ADC1);
 		int adclocationone = readAntenna1();
 		int adclocationtwo = readAntenna2();
 		int AnglePlayer1 = GetAngleplayer1(adclocationone);
@@ -118,18 +121,24 @@ void turn(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerU
 		} else if (variabel != readJoystick()){
 				variabel = readJoystick();
 				moveMenu(variabel,210);
-		}else if(Joystickposition < 20){ //move left
-			deleteBox(tiger->yLoc,tiger->xLoc);
-			tiger->yLoc-=6;
-			tiger->xLoc=baseHeight-(Height[(tiger->yLoc-1)/6]+1)*3;
-			tiger->fuel--;
-			while(Joystickposition < 20){}
-		} else if(Joystickposition > 200){ //move right
-			deleteBox(tiger->yLoc,tiger->xLoc);
-			tiger->yLoc+=6;
-			tiger->xLoc=baseHeight-(Height[(tiger->yLoc-1)/6]+1)*3;
-			tiger->fuel--;
-			while(Joystickposition > 200){}
+		}else if(Joystickposition < 50){ //move left
+			if(tiger->fuel > 0){
+				deleteBox(tiger->yLoc,tiger->xLoc);
+				tiger->yLoc-=6;
+				tiger->xLoc=baseHeight-(Height[(tiger->yLoc-1)/6]+1)*3;
+				tiger->fuel--;
+				tank(&*tiger);
+				for(int q = 0 ; q < 1000000 ; q++);
+			}
+		} else if(Joystickposition > 4000){ //move right
+			if(tiger->fuel > 0){
+				deleteBox(tiger->yLoc,tiger->xLoc);
+				tiger->yLoc+=6;
+				tiger->xLoc=baseHeight-(Height[(tiger->yLoc-1)/6]+1)*3;
+				tiger->fuel--;
+				tank(&*tiger);
+				for(int q = 0 ; q < 1000000 ; q++);
+			}
 		}
 	}
 }
