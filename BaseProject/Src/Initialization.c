@@ -179,6 +179,7 @@ void init2(){
 
 }
 
+//to create a square window
 void window(int y1, int x1, int y2, int x2){
 	clearScreenResCurser();
 	int x, y;
@@ -213,6 +214,7 @@ void window(int y1, int x1, int y2, int x2){
 	}
 }
 
+//for LEDs
 void setLed(int blue, int green, int red){
 	if (blue == 1){
 		GPIOA->ODR &= ~(0x0001 << 9); // Blue
@@ -244,6 +246,7 @@ void setLed(int blue, int green, int red){
 	}
 }
 
+//2 axis joystick x axis
 uint16_t readAntenna8(){
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_8, 1, ADC_SampleTime_1Cycles5);
 		ADC_StartConversion(ADC1); // Start ADC read
@@ -252,6 +255,7 @@ uint16_t readAntenna8(){
 		return x;
 }
 
+//2 axis joystick y axis
 uint16_t readAntenna9(){
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_9, 1, ADC_SampleTime_1Cycles5);
 		ADC_StartConversion(ADC1); // Start ADC read
@@ -260,6 +264,7 @@ uint16_t readAntenna9(){
 		return y;
 }
 
+//button red
 uint16_t readAntenna1(){
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_1Cycles5);
 	ADC_StartConversion(ADC1); // Start ADC read
@@ -267,6 +272,8 @@ uint16_t readAntenna1(){
 	uint16_t x = ADC_GetConversionValue(ADC1); // Read the ADC value
 	return x;
 }
+
+//button white
 uint16_t readAntenna2(){
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_2, 1, ADC_SampleTime_1Cycles5);
 	ADC_StartConversion(ADC1); // Start ADC read
@@ -275,6 +282,7 @@ uint16_t readAntenna2(){
 	return y;
 }
 
+//on board joystick
 uint8_t readJoystick(){
 	uint16_t up = GPIOA->IDR & (0x0001 << 4); //Read from pin PA4
 	uint16_t center = GPIOB->IDR & (0x0001 << 5); //Read from pin PB5
@@ -302,6 +310,7 @@ uint8_t readJoystick(){
 	return bit;
 }
 
+//gets input from potentiometers for random
 void randConfig(){
 	RCC->CFGR2 &= ~RCC_CFGR2_ADCPRE12; // Clear ADC12 prescaler bits
 	RCC->CFGR2 |= RCC_CFGR2_ADCPRE12_DIV6; // Set ADC12 prescaler to 6

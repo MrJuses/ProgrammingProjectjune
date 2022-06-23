@@ -28,6 +28,7 @@
 #include "Timer.h"
 #include "Movement.h"
 
+//time struct
 typedef struct{
 		int hours;
 		int minutes;
@@ -37,7 +38,7 @@ typedef struct{
 
 static timer timer2;
 
-
+//converts to min and hours from seconds
 void TIM2_IRQHandler(void) {
 
 	timer2.hundreds++;
@@ -58,26 +59,37 @@ void TIM2_IRQHandler(void) {
 	TIM2->SR &= ~0x0001; // Clear interrupt bit
 }
 
+//player turns
 void turn(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerUp_t powerUp, uint16_t variabel,int win, int t){
 	int fire=0;
+
+	//win condition tank 1 or tank 2
 	if (win==1){
 		EndGame(timer2.hours, timer2.minutes, timer2.seconds,*tiger,*sherman);
 		setLed(0,1,1);
 	} else if (win==2){
-		EndGame(timer2.hours, timer2.minutes, timer2.seconds,*sherman,*tiger);
+		EndGame(timer2.hours, timer2.minutes, timer2.seconds,*tiger,*sherman);
 		setLed(0,1,1);
 	}
+
+	//checks if cannon fired
 	while(fire==0){
+
+		//display time
 		moveToXY(0,0);
 		TimerWindow();
 		moveToXY(0,0);
 		printf("GAMETIME : %d:%d:%d ",timer2.hours, timer2.minutes, timer2.seconds);
+
+		//inits
 		readAntenna8();
 		uint16_t Joystickposition = ADC_GetConversionValue(ADC1);
 		int adclocationone = readAntenna1();
 		int adclocationtwo = readAntenna2();
 		int AnglePlayer1 = GetAngleplayer1(adclocationone);
 		int AnglePlayer2 = GetAngleplayer2(adclocationtwo);
+
+		//angles
 		fgcolor(2);
 		moveToXY(0,175);
 		printf("Angle for player 1's shot: %d ", AnglePlayer1);
@@ -85,15 +97,18 @@ void turn(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerU
 		moveToXY(3,175);
 		printf("Angle for player 2's shot: %d ", AnglePlayer2);
 
+		//adjusts angle real time
+		//if angle tank1
 		if(t==1){
 			if((tiger->angle!=AnglePlayer1)||(sherman->angle!=AnglePlayer2)){
-		tiger->angle=AnglePlayer1;
-		sherman->angle=AnglePlayer2;
-		deleteBox(tiger->yLoc,tiger->xLoc);
-		deleteBox(sherman->yLoc,sherman->xLoc);
-		tank(&*tiger);
-		tank(&*sherman);
-		}
+				tiger->angle=AnglePlayer1;
+				sherman->angle=AnglePlayer2;
+				deleteBox(tiger->yLoc,tiger->xLoc);
+				deleteBox(sherman->yLoc,sherman->xLoc);
+				tank(&*tiger);
+				tank(&*sherman);
+			}
+		//if angle tank2
 		}else if(t==2){
 			if((tiger->angle!=AnglePlayer2)||(sherman->angle!=AnglePlayer1)){
 			tiger->angle=AnglePlayer2;
@@ -104,19 +119,24 @@ void turn(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerU
 			tank(&*sherman);
 		}}
 
+		//checks if shots fired
 		if (variabel != readButton()){
 			variabel = readButton();
+			//normal shot
 			if((shootButton(variabel)==4)&&(tiger->ammo1>0)){
 				fire=shoot(Height,baseHeight, &*tiger,&*sherman,powerUp);
+			//tripple shot
 			} else if((shootButton(variabel)==2048)&&(tiger->ammo2>0)){
 				shoot(Height,baseHeight, &*tiger, &*sherman,powerUp);
 				shoot(Height,baseHeight, &*tiger, &*sherman,powerUp);
 				fire=shoot(Height,baseHeight, &*tiger, &*sherman,powerUp);
 				tiger->ammo2=tiger->ammo2-1;
 			}
+		//go to menu or others
 		} else if (variabel != readJoystick()){
 				variabel = readJoystick();
 				moveMenu(variabel,210);
+		//move tank
 		}else if(Joystickposition < 50){ //move left
 			if(tiger->fuel > 0){
 				deleteBox(tiger->yLoc,tiger->xLoc);
@@ -126,6 +146,7 @@ void turn(int Height[] ,int baseHeight, tank_t * tiger, tank_t * sherman, powerU
 				tank(&*tiger);
 				for(int q = 0 ; q < 1000000 ; q++);
 			}
+		//move tank
 		} else if(Joystickposition > 4000){ //move right
 			if(tiger->fuel > 0){
 				deleteBox(tiger->yLoc,tiger->xLoc);

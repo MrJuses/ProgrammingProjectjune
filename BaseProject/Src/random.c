@@ -10,6 +10,7 @@
 #include "random.h"
 #include "Initialization.h"
 
+//takes output from potentiometers and adds them together then spits out a random number between 0 and 9
 int getRand(){
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_1Cycles5);
 

@@ -10,6 +10,4 @@ void smallBox(int yPos, int xPos, int color);
 void deleteBox(int yPos, int xPos);
 void deleteSmallBox(int yPos, int xPos);
 void powerUp(int y, int x, int type);
-void drawMeteor(int y,int x,int angle);
-
 #endif /* VISUALS_H_ */

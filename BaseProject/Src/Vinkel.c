@@ -1,14 +1,7 @@
-
-/*
- * Vinkel.c
- *
- *  Created on: Jun 21, 2022
- *      Author: Mars
- */
-
 #include "stdio.h"
 #include "Endgame.h"
 
+//generalize angle from potentiometers to lower numbers between 0 and 180
 int GetAngleplayer1(int adcangle){
 	int angle;
 	if (adcangle > 4077){
@@ -55,6 +48,7 @@ int GetAngleplayer1(int adcangle){
 	return angle;
 }
 
+//generalize angle from potentiometers to lower numbers between 0 and 180
 int GetAngleplayer2(int adcangle){
 	int angle;
 	if (adcangle > 4066){

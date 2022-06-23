@@ -17,36 +17,33 @@
 #include "Timer.h"
 
 int main(void){
+	//initializing
 	uart_init(256000);
 	clearScreenResCurser();
 	init();
 	init2();
+	randConfig();
+
+	//reset LEDs
 	GPIOC->ODR |= (0x0001 << 7); // Green
 	GPIOA->ODR |= (0x0001 << 9); // Blue
 	GPIOB->ODR |= (0x0001 << 4); // Red
-	randConfig();
+
+	//set LED to white
 	setLed(1,1,1);
 	uint8_t variabel;
 	variabel = readJoystick();
 
-	game_t game;
-	tank_t tank1;
-	tank_t tank2;
-
 	//Project start
-	int gWidth = 210, gHeight = 100;
+	//screen width
+	int gWidth = 210;
 	clearScreenResCurser();
+
+	//open menu
 	menu(gWidth);
 
-
-	//Project start
-	int tHeight[73];
-
 	while(1){
-		if (variabel != readJoystick()){
-			variabel = readJoystick();
-			//MoveWithJoystick(variabel);
-		}
+
 	}
 	return 0;
 }

@@ -12,26 +12,32 @@
 #include "movement.h"
 #include "Initialization.h"
 
+//draws a square with a specific color at a position
 void drawLetter(int yPos, int xPos,int color){
 	fgcolor(color);
 	moveToXY(xPos,yPos);
 	printf("%c",219);
 	printf("%c",219);
 }
+//displays main menu
 void menu(int width){
-	int yPos = 10,xPos = 10;
+	int yPos = 10,xPos = 10;  //title position
 	uint8_t variabel;
 	variabel = readJoystick();
 
 	clearScreenResCurser();
 	int y = yPos;
-	alphabet("space-tanks",(width/4),xPos);
+	alphabet("space-tanks",(width/4),xPos); //title
 	//print border
 	moveToXY(yPos+10,0);
 	fgcolor(15);
+
+	//draws line across screen
 	for(int i = 0; i < width; i++){
 		printf("%c",205);
 	}
+
+	//selection display
 	fgcolor(15);
 	moveToXY(xPos+15,width/2-3);
 	printf("Start");
@@ -46,6 +52,8 @@ void menu(int width){
 	printf("(Joystick Right -> Help)");
 	moveToXY(xPos+47,width/2-13);
 	printf("(Joystick Down -> Exit)");
+
+	//nav inputs
 	while(1){
 		if (variabel != readJoystick()){
 			variabel = readJoystick();
@@ -54,11 +62,13 @@ void menu(int width){
 	}
 
 }
+//help screen
 void helpMenu(int width){
 	uint8_t variabel;
 	variabel = readJoystick();
 	int yPos = 10,xPos = 10;
 
+	//title and line
 	clearScreenResCurser();
 	alphabet("help",(width/2)-20,xPos);
 	//print border
@@ -68,10 +78,12 @@ void helpMenu(int width){
 		printf("%c",205);
 	}
 
+	//menu options
 	fgcolor(15);
 	moveToXY(xPos+15,width/2-3);
 	printf("Back");
 
+	//game description
 	moveToXY(xPos+22,width/2-65);
 	printf("Space-Tanks is a two-player competitive turn based game, on the moon, where you must find the correct angle to shoot each other,");
 	moveToXY(xPos+23,width/2-65);
@@ -83,6 +95,7 @@ void helpMenu(int width){
 	moveToXY(xPos+26,width/2-65);
 	printf("        For additional help visit our User manual, here all the functions and descriptions can be read in full detail!");
 
+	//game controls
 	moveToXY(xPos+33,width/2-20);
 	printf("(Potentiometer 1 -> Green Tank Angle)");
 
@@ -105,10 +118,11 @@ void helpMenu(int width){
 	printf("(Joystick Center -> BossKey)");
 
 
-
+	//menu nav
 	moveToXY(xPos+47,width/2-11);
 	printf("(Joystick Left -> Back)");
 
+	//input
 	while(1){
 		if (variabel != readJoystick()){
 			variabel = readJoystick();
@@ -117,9 +131,10 @@ void helpMenu(int width){
 	}
 }
 
+//draws different blockwords
 void alphabet(char string[20],int yPos,int xPos){
 	int color = 1,y = yPos;
-	int stringLength = strlen(string);
+	int stringLength = strlen(string);  //takes string and iterates through it
 	for(int i = 0; i < stringLength; i++){
 		//S
 		if(string[i] == 's'){

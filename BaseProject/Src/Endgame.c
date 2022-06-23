@@ -24,7 +24,7 @@
 #include "timer.h"
 #include "structs.h"
 
-//calculates the winners score
+//calculates the winners score based on time and winner stats
 int scoreCalculator(int hours, int minutes, int seconds,tank_t * winner){
 
 	int timeScore = hours*10000 + minutes*500 + seconds*50;
@@ -33,6 +33,7 @@ int scoreCalculator(int hours, int minutes, int seconds,tank_t * winner){
 	return Endscore;
 }
 
+// print title and general message
 void printEndGameScreen(){
 
 	alphabet("space-thanks",210/4-5,10);
@@ -45,27 +46,34 @@ void printEndGameScreen(){
 
 }
 
+//stats and details are printed
 void EndGame(int hours, int minutes, int seconds, tank_t player1, tank_t player2){
 	int winner=0;
 	clearScreenResCurser();
 	stopTimer();
+
+	//determines winner
 	if(player1.health > player2.health){
 		winner = 1;
-	} else if(player1.health < player2.health){
+	} else{
 		winner = 2;
 	}
 	printEndGameScreen();
 
+	//sets score
 	int Finalscore;
 	if(winner == 1){
 		Finalscore = scoreCalculator(hours, minutes, seconds,&player1);
 	} else if(winner == 2){
 		Finalscore = scoreCalculator(hours, minutes, seconds,&player2);
 	}
+
+	//prints game-time
 	moveToXY(35,47);
 	fgcolor(6);
 	printf("The game lasted for : %d hours, %d minutes and  %d seconds", hours, minutes, seconds);
 
+	//if green won show stats for green tank
 	fgcolor(15);
 	if(winner==1){
 		moveToXY(40,47);
@@ -83,6 +91,7 @@ void EndGame(int hours, int minutes, int seconds, tank_t player1, tank_t player2
 		moveToXY(60,47);
 		printf("Your final score is: %d", Finalscore);
 
+	//if blue won show stats for blue tank
 	} else if(winner==2){
 		moveToXY(40,47);
 		printf("Blue Player has won");

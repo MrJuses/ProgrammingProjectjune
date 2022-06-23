@@ -1,10 +1,3 @@
-/*
- * Movement.c
- *
- *  Created on: Jun 14, 2022
- *      Author: Mars
- */
-
 #include "stdio.h"
 #include "stdint.h"
 #include "ansi.h"
@@ -13,14 +6,16 @@
 #include "gameplay.h"
 #include "bossKey.h"
 
+//menu navigation
 void moveMenu(uint8_t variabel,int width){
 	switch(variabel){
-		 case 1: { // UP
+		 case 1: { // UP start game
 			runGame();
 			break;
-		}case 2: { // DOWN
+		}case 2: { // DOWN  exit game
 			clearScreenResCurser();
 			fgcolor(2);
+			//exit animation
 			for(int i = 0 ; i < 5 ; i++){
 				moveToXY(2,2);
 				printf("EXITING GAME");
@@ -35,13 +30,13 @@ void moveMenu(uint8_t variabel,int width){
 			clearScreenResCurser();
 			exit(0);
 			break;
-		}case 4:{ // LEFT
+		}case 4:{ // LEFT back to main menu
 			menu(width);
 			break;
-		}case 8:{ // RIGHT
+		}case 8:{ // RIGHT help menu
 			helpMenu(width);
 			break;
-		}case 16: { // CENTER
+		}case 16: { // CENTER bosskey
 			bossKey();
 			break;
 

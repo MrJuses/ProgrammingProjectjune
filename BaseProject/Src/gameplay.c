@@ -41,7 +41,6 @@ void runGame(){
 			Height[i] = getRand()/2;
 		} else{
 			int x = getRand()/2;
-			//int sameLevel = 0;
 			while(!(Height[i-1]+1 == x || Height[i-1]-1 == x || Height[i-1] == x)){
 				x = getRand()/2;
 			}
@@ -77,56 +76,64 @@ void runGame(){
 	triple.y=1;
 	game.roundNum=1;
 
-
+	//draws terrain and tanks
 	clearScreenResCurser();
 	drawTerrain(mapWidth,mapHeight,Height);
 	tank(&tank1);
 	tank(&tank2);
 
+	//gameloop
 	while(1){
-		setLed(1,0,1);
+		setLed(1,0,1);//purple
+
+		//spawns meteor(s) depending on the round
 		for(int i = 0; i < game.roundNum; i++){
 			randMeteor(Height,mapHeight,&tank1,&tank2);
 		}
-		randPower(1,&triple);
-		setLed(0,1,0);
-		lcdDisplay(&tank1);
-		turn(Height,mapHeight,&tank1,&tank2,triple,variabel,win,1);
-		if(tank2.health<=0){win=1;}
-		else if(tank1.health<=0){win=2;}
-		setLed(1,0,0);
-		lcdDisplay(&tank2);
-		turn(Height,mapHeight,&tank2,&tank1,triple,variabel,win,2);
+		if(tank2.health<=0){win=1;} //check if green is dead
+		else if(tank1.health<=0){win=2;} //check if blue is dead
+		randPower(1,&triple);  //chance for power to spawn
+		setLed(0,1,0); //green
+		lcdDisplay(&tank1); //stats for green tank
+		turn(Height,mapHeight,&tank1,&tank2,triple,variabel,win,1); // greens turn
+		if(tank2.health<=0){win=1;}  //check if tank
+		else if(tank1.health<=0){win=2;}  //check if blue is dead
+		setLed(1,0,0); //blue
+		lcdDisplay(&tank2);  //stats for blue tank
+		turn(Height,mapHeight,&tank2,&tank1,triple,variabel,win,2); //blues turn
+		//gives extra fuel
 		tank1.fuel++;
 		tank2.fuel++;
 
+		//1 round has passed = more meteors
 		game.roundNum++;
-		if(tank2.health<=0){win=1;}
-		else if(tank1.health<=0){win=2;}
+		if(tank2.health<=0){win=1;} //check if green is dead
+		else if(tank1.health<=0){win=2;} //check if blue is dead
 	}
 }
 
+//power-up
 void randPower(int type, powerUp_t * triple){
-	if(getRand() > 7){
-		int x = getRand()*getRand(), y = getRand()*getRand()*getRand();
-		while(x > 28 || x == 0 || y == 0 || y > 210){
+	if(getRand() > 7){  //chance of spawning = 2/10
+		int x = getRand()*getRand(), y = getRand()*getRand()*getRand();  //multiply random numbers together to allow spawning all across the screen
+		while(x > 28 || x == 0 || y == 0 || y > 210){  //makes sure to spawn it within the screen boundaries
 			x = getRand()*getRand(),y = getRand()*getRand()*getRand();
 		}
-		deleteBox(triple->y,triple->x);
+		deleteBox(triple->y,triple->x);  //deletes old power-up
 		triple->x=x;
 		triple->y=y;
-		powerUp(y,x,type);
+		powerUp(y,x,type);  // creates new power-up
 	}
 }
 
+//meteor
 void randMeteor(int Height[],int baseHeight,tank_t * tiger,tank_t * sherman){
-	//if(getRand()*getRand() < )
-	int angle = getRand()*10+225;
-	int x = 0, y = getRand()*getRand()*getRand();
-	while(y == 0 || y > 210){
+	int angle = getRand()*10+225;  // shoots at different angles
+	int x = 0, y = getRand()*getRand()*getRand();  //utilize full width to spawn
+	while(y == 0 || y > 210){  //checks if within boundaries
 		y = getRand()*getRand()*getRand();
 	}
 	x++;
-	for(int i = 0; i < 10000 ; i++);
-	meteorFall(angle,x,y,Height,baseHeight, &*tiger, &*sherman);
+	for(int i = 0; i < 10000 ; i++);  //small delay to visualize it better
+	meteorFall(angle,x,y,Height,baseHeight, &*tiger, &*sherman);  //shoot meteor from sky mechanic
 }
